@@ -5,7 +5,6 @@
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName=".Post" parentEntity="SyncableObject" syncable="YES">
-        <attribute name="attribute" optional="YES" syncable="YES"/>
         <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
     </entity>
@@ -15,8 +14,8 @@
         <attribute name="timestamp" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Post" positionX="178" positionY="-10" width="128" height="88"/>
-        <element name="SyncableObject" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="Comment" positionX="180" positionY="188" width="128" height="73"/>
+        <element name="Post" positionX="178" positionY="-10" width="128" height="73"/>
+        <element name="SyncableObject" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>
