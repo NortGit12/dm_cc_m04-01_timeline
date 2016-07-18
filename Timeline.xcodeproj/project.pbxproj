@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */; };
+		1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */; };
+		1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */; };
+		1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
-		68658B2A1CF8A1D60016C5CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B291CF8A1D60016C5CD /* ViewController.swift */; };
 		68658B2D1CF8A1D60016C5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2B1CF8A1D60016C5CD /* Main.storyboard */; };
 		68658B2F1CF8A1D60016C5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2E1CF8A1D60016C5CD /* Assets.xcassets */; };
 		68658B321CF8A1D60016C5CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */; };
@@ -34,9 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
+		1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
+		1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
+		1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68658B271CF8A1D60016C5CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		68658B291CF8A1D60016C5CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		68658B2C1CF8A1D60016C5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68658B2E1CF8A1D60016C5CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68658B311CF8A1D60016C5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -74,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F4D25B61D3D6E8000F4DBFD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */,
+				1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */,
+				1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */,
+				1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		68658B1B1CF8A1D60016C5CD = {
 			isa = PBXGroup;
 			children = (
@@ -98,11 +115,11 @@
 			isa = PBXGroup;
 			children = (
 				68658B271CF8A1D60016C5CD /* AppDelegate.swift */,
-				68658B291CF8A1D60016C5CD /* ViewController.swift */,
-				68658B2B1CF8A1D60016C5CD /* Main.storyboard */,
+				1F4D25B61D3D6E8000F4DBFD /* ViewController */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
-				68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
+				68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */,
+				68658B2B1CF8A1D60016C5CD /* Main.storyboard */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -256,8 +273,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68658B2A1CF8A1D60016C5CD /* ViewController.swift in Sources */,
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
+				1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */,
+				1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */,
+				1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */,
+				1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +504,7 @@
 				68658B4E1CF8A1D60016C5CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68658B4F1CF8A1D60016C5CD /* Build configuration list for PBXNativeTarget "TimelineTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +513,7 @@
 				68658B511CF8A1D60016C5CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68658B521CF8A1D60016C5CD /* Build configuration list for PBXNativeTarget "TimelineUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +522,7 @@
 				68658B541CF8A1D60016C5CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
