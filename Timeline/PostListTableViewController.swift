@@ -43,42 +43,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-    
     // MARK: - NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -95,7 +59,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         case .Move: break
         case .Update: break
         }
-        
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
@@ -111,7 +74,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         case .Update:
             configureCell(self.tableView.cellForRowAtIndexPath(indexPath!)!, indexPath: indexPath!)
         }
-        
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -122,10 +84,16 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func initializeFetchedResultsController() {
         
-        fetchedResultsController = PostController.sharedController.fetchedResultsController
+        let request = NSFetchRequest(entityName: "Post")
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
-        fetchedResultsController.delegate = self
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: "timestamp", cacheName: nil)
         
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error fetching posts: \(error)")
+        }
     }
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
@@ -133,7 +101,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         guard let cell = cell as? PostTableViewCell, let post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
         
         cell.updateWithPost(post)
-        
     }
 
     
@@ -156,7 +123,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                     // Did I finish packing?
                     postDetailTableViewController.post = post
                 }
-                
             }
         }
     }

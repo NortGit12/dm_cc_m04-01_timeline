@@ -17,26 +17,6 @@ class PostController {
     
     let moc = Stack.sharedStack.managedObjectContext
     
-    let fetchedResultsController: NSFetchedResultsController
-    
-    weak var delegate: NSFetchedResultsControllerDelegate?
-    
-    // MARK: - Initializer(s)
-    
-    init() {
-        
-        let request = NSFetchRequest(entityName: "Post")
-        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: "timestamp", cacheName: nil)
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Error fetching posts: \(error)")
-        }
-    }
-    
     // MARK: - Method(s)
     
     func createPost(image: UIImage, caption: String) {

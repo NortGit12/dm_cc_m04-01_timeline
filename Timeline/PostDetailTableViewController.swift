@@ -19,110 +19,143 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
     @IBOutlet weak var followPostBarButtonItem: UIBarButtonItem!
     
     var post: Post?
-    weak var commentController: CommentController?
     
-    var postFetchedResultsController: NSFetchedResultsController!
-    var commentFetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController!
     
     // MARK: - General
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initializeFetchedResultsControllers()
-
+        initializeFetchedResultsController()
+        
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 200
-    }
-    
-    // MARK: - Method(s)
-    
-    func updateWithPost(post: Post) {
-        
-        if let imageData = post.photoData {
-            imageView.image = UIImage(data: imageData)
-            tableView.reloadData()
-        }
-    }
-    
-    func initializeFetchedResultsControllers() {
-        
-        postFetchedResultsController = PostController.sharedController.fetchedResultsController
-        
-        postFetchedResultsController.delegate = self
-        
-        if let post = post {
-            
-            commentFetchedResultsController = commentFetchedResultsController.getCommentFetchedResultsControllerForPost(post)
-        }
-        
+        tableView.estimatedRowHeight = 100
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        guard let currentSectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+        
+        return currentSectionInfo.numberOfObjects
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCellWithIdentifier("postDetailCell", forIndexPath: indexPath)
+
+        guard let comments = post?.comments else { return UITableViewCell() }
+        
+        let comment = comments[indexPath.row]
+        
+        cell.textLabel?.text = comment.text
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        switch type {
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Move: break
+        case .Update: break
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Update:
+            configureCell(self.tableView.cellForRowAtIndexPath(indexPath!)!, indexPath: indexPath!)
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Methods
+    
+    func initializeFetchedResultsController() {
+        
+        guard let post = post else { return }
+        
+        let request = NSFetchRequest(entityName: "Comment")
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
+        request.predicate = NSPredicate(format: "post == %@", post)
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error fetching comments: \(error)")
+        }
     }
-    */
+    
+    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+
+        guard let comments = post?.comments else { return }
+        
+        let comment = comments[indexPath.row]
+        
+        cell.textLabel?.text = comment.text
+    }
+    
+    // MARK: - Action(s)
+    
+    @IBAction func commentButtonTapped(sender: UIBarButtonItem) {
+        
+        let alertController = UIAlertController(title: "New Comment", message: "", preferredStyle: .Alert)
+        
+        alertController.addTextFieldWithConfigurationHandler { (commentTextField) in
+            
+            commentTextField.placeholder = "New comment..."
+            commentTextField.becomeFirstResponder()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (_) in
+            
+            guard let post = self.post, newPostText = alertController.textFields?[0].text else { return }
+            
+            let _ = Comment(post: post, text: newPostText)
+            self.tableView.reloadData()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareButtonTapped(sender: UIBarButtonItem) {
+        
+        
+    }
+    
+    @IBAction func followButtonTapped(sender: UIBarButtonItem) {
+        
+        
+    }
 
 }

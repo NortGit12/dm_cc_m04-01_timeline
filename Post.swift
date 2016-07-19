@@ -2,7 +2,7 @@
 //  Post.swift
 //  Timeline
 //
-//  Created by Jeff Norton on 7/18/16.
+//  Created by Jeff Norton on 7/19/16.
 //  Copyright © 2016 DevMountain. All rights reserved.
 //
 
@@ -21,4 +21,5 @@ class Post: SyncableObject {
         self.photoData = photo
         self.timestamp = timestamp
     }
+
 }

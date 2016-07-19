@@ -12,7 +12,7 @@ import CoreData
 
 class Comment: SyncableObject {
 
-    convenience init?(post: Post, text: String, timestamp: NSDate, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+    convenience init?(post: Post, text: String, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let commentEntity = NSEntityDescription.entityForName("Comment", inManagedObjectContext: context) else { return nil }
 
