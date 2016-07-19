@@ -7,45 +7,42 @@
 //
 
 import UIKit
+import CoreData
 
-class PostListTableViewController: UITableViewController {
+class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    // MARK: - Stored Properties
+    
+    var fetchedResultsController: NSFetchedResultsController!
+    
+    // MARK: - General
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        initializeFetchedResultsController()
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        guard let currentSectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+        
+        return currentSectionInfo.numberOfObjects
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as? PostTableViewCell else { return UITableViewCell() }
+        
+        
+        configureCell(cell, indexPath: indexPath)
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -81,15 +78,87 @@ class PostListTableViewController: UITableViewController {
         return true
     }
     */
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        switch type {
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Move: break
+        case .Update: break
+        }
+        
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Update:
+            configureCell(self.tableView.cellForRowAtIndexPath(indexPath!)!, indexPath: indexPath!)
+        }
+        
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
+    
+    // MARK: - Methods
+    
+    func initializeFetchedResultsController() {
+        
+        fetchedResultsController = PostController.sharedController.fetchedResultsController
+        
+        fetchedResultsController.delegate = self
+        
+    }
+    
+    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+        
+        guard let cell = cell as? PostTableViewCell, let post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
+        
+        cell.updateWithPost(post)
+        
+    }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        // How are we getting there?
+        if segue.identifier == "viewPostSegue" {
+            
+            // Where are we going?
+            if let postDetailTableViewController = segue.destinationViewController as? PostDetailTableViewController {
+                
+                // What do we need to pack?
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    
+                    let post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post
+                    
+                    // Did I finish packing?
+                    postDetailTableViewController.post = post
+                }
+                
+            }
+        }
     }
-    */
 
 }

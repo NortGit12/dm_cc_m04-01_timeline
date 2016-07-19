@@ -14,7 +14,6 @@ import CoreData
 
 extension Post {
 
-    @NSManaged var attribute: UNKNOWN_TYPE
     @NSManaged var photoData: NSData?
     @NSManaged var comments: NSSet?
 

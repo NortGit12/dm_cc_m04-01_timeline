@@ -7,22 +7,55 @@
 //
 
 import UIKit
+import CoreData
 
-class PostDetailTableViewController: UITableViewController {
+class PostDetailTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    // MARK: - Stored Properties
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var commenBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var followPostBarButtonItem: UIBarButtonItem!
+    
+    var post: Post?
+    weak var commentController: CommentController?
+    
+    var postFetchedResultsController: NSFetchedResultsController!
+    var commentFetchedResultsController: NSFetchedResultsController!
+    
+    // MARK: - General
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initializeFetchedResultsControllers()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Method(s)
+    
+    func updateWithPost(post: Post) {
+        
+        if let imageData = post.photoData {
+            imageView.image = UIImage(data: imageData)
+            tableView.reloadData()
+        }
+    }
+    
+    func initializeFetchedResultsControllers() {
+        
+        postFetchedResultsController = PostController.sharedController.fetchedResultsController
+        
+        postFetchedResultsController.delegate = self
+        
+        if let post = post {
+            
+            commentFetchedResultsController = commentFetchedResultsController.getCommentFetchedResultsControllerForPost(post)
+        }
+        
     }
 
     // MARK: - Table view data source

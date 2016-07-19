@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */; };
+		1F36869B1D3E490500EC046B /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36869A1D3E490500EC046B /* CommentController.swift */; };
 		1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */; };
 		1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */; };
 		1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */; };
@@ -20,6 +22,7 @@
 		1F4D25D11D3D784A00F4DBFD /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25CF1D3D784A00F4DBFD /* Post+CoreDataProperties.swift */; };
 		1F4D25D21D3D784A00F4DBFD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D01D3D784A00F4DBFD /* Post.swift */; };
 		1F4D25D41D3D7A3200F4DBFD /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D31D3D7A3200F4DBFD /* PostController.swift */; };
+		1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
 		68658B2D1CF8A1D60016C5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2B1CF8A1D60016C5CD /* Main.storyboard */; };
 		68658B2F1CF8A1D60016C5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2E1CF8A1D60016C5CD /* Assets.xcassets */; };
@@ -46,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManger.swift; sourceTree = "<group>"; };
+		1F36869A1D3E490500EC046B /* CommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 		1F4D25CF1D3D784A00F4DBFD /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F4D25D01D3D784A00F4DBFD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1F4D25D31D3D7A3200F4DBFD /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68658B271CF8A1D60016C5CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68658B2C1CF8A1D60016C5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 				1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */,
 				1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */,
 				1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */,
+				1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				1F4D25D31D3D7A3200F4DBFD /* PostController.swift */,
+				1F36869A1D3E490500EC046B /* CommentController.swift */,
 				1F4D25C01D3D713500F4DBFD /* Stack.swift */,
 			);
 			name = ModelController;
@@ -161,6 +169,7 @@
 				1F4D25D51D3D7A4100F4DBFD /* ModelController */,
 				1F4D25B61D3D6E8000F4DBFD /* ViewController */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
+				1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
 				68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */,
 				68658B2B1CF8A1D60016C5CD /* Main.storyboard */,
@@ -319,12 +328,15 @@
 			files = (
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
 				1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */,
+				1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */,
+				1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */,
 				1F4D25C81D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift in Sources */,
 				1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */,
 				1F4D25D21D3D784A00F4DBFD /* Post.swift in Sources */,
 				1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */,
 				1F4D25D11D3D784A00F4DBFD /* Post+CoreDataProperties.swift in Sources */,
 				1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */,
+				1F36869B1D3E490500EC046B /* CommentController.swift in Sources */,
 				1F4D25C91D3D735600F4DBFD /* SyncableObject.swift in Sources */,
 				1F4D25CE1D3D770200F4DBFD /* Comment.swift in Sources */,
 				1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */,
