@@ -31,8 +31,7 @@ class PostTableViewCell: UITableViewCell {
     
     func updateWithPost(post: Post) {
         
-        guard let photoData = post.photoData else { return }
-            
+        let photoData = post.photoData
         postImageView.image = UIImage(data: photoData)
     }
 

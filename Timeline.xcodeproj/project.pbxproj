@@ -14,6 +14,7 @@
 		1F05CA8B1D3ED996002AD1DD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA851D3ED996002AD1DD /* Comment.swift */; };
 		1F05CA8C1D3ED996002AD1DD /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */; };
 		1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA871D3ED996002AD1DD /* Post.swift */; };
+		1F0B10E01D3FA213009977EC /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B10DF1D3FA213009977EC /* SearchableRecord.swift */; };
 		1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */; };
 		1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */; };
 		1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */; };
@@ -55,6 +56,7 @@
 		1F05CA851D3ED996002AD1DD /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F05CA871D3ED996002AD1DD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1F0B10DF1D3FA213009977EC /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				1F4D25D31D3D7A3200F4DBFD /* PostController.swift */,
 				1F4D25C01D3D713500F4DBFD /* Stack.swift */,
+				1F0B10DF1D3FA213009977EC /* SearchableRecord.swift */,
 			);
 			name = ModelController;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				1F05CA891D3ED996002AD1DD /* SyncableObject.swift in Sources */,
 				1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */,
 				1F05CA881D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift in Sources */,
+				1F0B10E01D3FA213009977EC /* SearchableRecord.swift in Sources */,
 				1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */,
 				1F4D25D41D3D7A3200F4DBFD /* PostController.swift in Sources */,
 				1F4D25BF1D3D711B00F4DBFD /* Model.xcdatamodeld in Sources */,

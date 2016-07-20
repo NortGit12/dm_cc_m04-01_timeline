@@ -12,6 +12,8 @@ import CoreData
 
 class Post: SyncableObject {
 
+    // MARK: - Initializer(s)
+    
     convenience init?(photo: NSData, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let postEntity = NSEntityDescription.entityForName("Post", inManagedObjectContext: context) else { return nil }
@@ -19,7 +21,17 @@ class Post: SyncableObject {
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         
         self.photoData = photo
+        self.recordName = "Post"
         self.timestamp = timestamp
+    }
+    
+    // MARK: - Method(s)
+    
+    func matchesSearchTerm(searchTerm: String) -> Bool {
+        
+//        guard let result = self.text?.containsString(searchTerm) else { return false }
+        
+        return false
     }
 
 }

@@ -10,8 +10,10 @@ import Foundation
 import CoreData
 
 
-class Comment: SyncableObject {
+class Comment: SyncableObject, SearchableRecord {
 
+    // MARK: - Initializer(s)
+    
     convenience init?(post: Post, text: String, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let commentEntity = NSEntityDescription.entityForName("Comment", inManagedObjectContext: context) else { return nil }
@@ -20,7 +22,14 @@ class Comment: SyncableObject {
         
         self.post = post
         self.text = text
+        self.recordName = "Comment"
         self.timestamp = timestamp
     }
-
+    
+    // MARK: - Method(s)
+    
+    func matchesSearchTerm(searchTerm: String) -> Bool {
+        
+        return self.text.containsString(searchTerm)
+    }
 }
