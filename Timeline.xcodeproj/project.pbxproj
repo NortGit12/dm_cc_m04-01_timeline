@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */; };
-		1F05CA801D3ED301002AD1DD /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA7E1D3ED301002AD1DD /* Post+CoreDataProperties.swift */; };
-		1F05CA811D3ED301002AD1DD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA7F1D3ED301002AD1DD /* Post.swift */; };
+		1F05CA881D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA821D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift */; };
+		1F05CA891D3ED996002AD1DD /* SyncableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA831D3ED996002AD1DD /* SyncableObject.swift */; };
+		1F05CA8A1D3ED996002AD1DD /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA841D3ED996002AD1DD /* Comment+CoreDataProperties.swift */; };
+		1F05CA8B1D3ED996002AD1DD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA851D3ED996002AD1DD /* Comment.swift */; };
+		1F05CA8C1D3ED996002AD1DD /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */; };
+		1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA871D3ED996002AD1DD /* Post.swift */; };
 		1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */; };
 		1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */; };
 		1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */; };
 		1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */; };
 		1F4D25BF1D3D711B00F4DBFD /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25BD1D3D711B00F4DBFD /* Model.xcdatamodeld */; };
 		1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25C01D3D713500F4DBFD /* Stack.swift */; };
-		1F4D25C81D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25C41D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift */; };
-		1F4D25C91D3D735600F4DBFD /* SyncableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25C51D3D735600F4DBFD /* SyncableObject.swift */; };
-		1F4D25CD1D3D770200F4DBFD /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25CB1D3D770200F4DBFD /* Comment+CoreDataProperties.swift */; };
-		1F4D25CE1D3D770200F4DBFD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25CC1D3D770200F4DBFD /* Comment.swift */; };
 		1F4D25D41D3D7A3200F4DBFD /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D31D3D7A3200F4DBFD /* PostController.swift */; };
 		1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
@@ -49,18 +49,18 @@
 
 /* Begin PBXFileReference section */
 		1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManger.swift; sourceTree = "<group>"; };
-		1F05CA7E1D3ED301002AD1DD /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1F05CA7F1D3ED301002AD1DD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1F05CA821D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyncableObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F05CA831D3ED996002AD1DD /* SyncableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncableObject.swift; sourceTree = "<group>"; };
+		1F05CA841D3ED996002AD1DD /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F05CA851D3ED996002AD1DD /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F05CA871D3ED996002AD1DD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25BE1D3D711B00F4DBFD /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		1F4D25C01D3D713500F4DBFD /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
-		1F4D25C41D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyncableObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1F4D25C51D3D735600F4DBFD /* SyncableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncableObject.swift; sourceTree = "<group>"; };
-		1F4D25CB1D3D770200F4DBFD /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1F4D25CC1D3D770200F4DBFD /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1F4D25D31D3D7A3200F4DBFD /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,13 +117,13 @@
 		1F4D25CA1D3D736000F4DBFD /* Model + CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				1F05CA7E1D3ED301002AD1DD /* Post+CoreDataProperties.swift */,
-				1F05CA7F1D3ED301002AD1DD /* Post.swift */,
+				1F05CA821D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift */,
+				1F05CA831D3ED996002AD1DD /* SyncableObject.swift */,
+				1F05CA841D3ED996002AD1DD /* Comment+CoreDataProperties.swift */,
+				1F05CA851D3ED996002AD1DD /* Comment.swift */,
+				1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */,
+				1F05CA871D3ED996002AD1DD /* Post.swift */,
 				1F4D25BD1D3D711B00F4DBFD /* Model.xcdatamodeld */,
-				1F4D25CB1D3D770200F4DBFD /* Comment+CoreDataProperties.swift */,
-				1F4D25CC1D3D770200F4DBFD /* Comment.swift */,
-				1F4D25C41D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift */,
-				1F4D25C51D3D735600F4DBFD /* SyncableObject.swift */,
 			);
 			name = "Model + CoreData";
 			path = ..;
@@ -326,18 +326,18 @@
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
 				1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */,
 				1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */,
+				1F05CA8B1D3ED996002AD1DD /* Comment.swift in Sources */,
 				1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */,
-				1F4D25C81D3D735600F4DBFD /* SyncableObject+CoreDataProperties.swift in Sources */,
 				1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */,
+				1F05CA8A1D3ED996002AD1DD /* Comment+CoreDataProperties.swift in Sources */,
 				1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */,
+				1F05CA8C1D3ED996002AD1DD /* Post+CoreDataProperties.swift in Sources */,
 				1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */,
-				1F05CA801D3ED301002AD1DD /* Post+CoreDataProperties.swift in Sources */,
-				1F4D25C91D3D735600F4DBFD /* SyncableObject.swift in Sources */,
-				1F4D25CE1D3D770200F4DBFD /* Comment.swift in Sources */,
-				1F05CA811D3ED301002AD1DD /* Post.swift in Sources */,
+				1F05CA891D3ED996002AD1DD /* SyncableObject.swift in Sources */,
+				1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */,
+				1F05CA881D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift in Sources */,
 				1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */,
 				1F4D25D41D3D7A3200F4DBFD /* PostController.swift in Sources */,
-				1F4D25CD1D3D770200F4DBFD /* Comment+CoreDataProperties.swift in Sources */,
 				1F4D25BF1D3D711B00F4DBFD /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

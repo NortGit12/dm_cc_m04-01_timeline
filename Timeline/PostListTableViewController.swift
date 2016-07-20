@@ -24,7 +24,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     // MARK: - Table view data source
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let currentSectionInfo = fetchedResultsController.sections?[section] else { return 0 }
@@ -36,7 +36,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        
         
         configureCell(cell, indexPath: indexPath)
         
@@ -87,7 +86,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         let request = NSFetchRequest(entityName: "Post")
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: "timestamp", cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
         
         do {
             try fetchedResultsController.performFetch()
@@ -98,7 +97,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         
-        guard let cell = cell as? PostTableViewCell, let post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
+        guard let cell = cell as? PostTableViewCell, post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
         
         cell.updateWithPost(post)
     }

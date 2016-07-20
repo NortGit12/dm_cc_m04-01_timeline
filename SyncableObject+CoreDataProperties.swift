@@ -2,7 +2,7 @@
 //  SyncableObject+CoreDataProperties.swift
 //  Timeline
 //
-//  Created by Jeff Norton on 7/18/16.
+//  Created by Jeff Norton on 7/19/16.
 //  Copyright © 2016 DevMountain. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,8 +14,8 @@ import CoreData
 
 extension SyncableObject {
 
-    @NSManaged var timestamp: NSDate?
-    @NSManaged var recordName: String?
     @NSManaged var recordIDData: NSData?
+    @NSManaged var recordName: String
+    @NSManaged var timestamp: NSDate
 
 }

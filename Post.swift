@@ -12,7 +12,7 @@ import CoreData
 
 class Post: SyncableObject {
 
-    convenience init?(photo: NSData, timestamp: NSDate, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+    convenience init?(photo: NSData, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let postEntity = NSEntityDescription.entityForName("Post", inManagedObjectContext: context) else { return nil }
         

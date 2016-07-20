@@ -13,7 +13,7 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
     
     // MARK: - Stored Properties
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var commenBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var followPostBarButtonItem: UIBarButtonItem!
@@ -31,27 +31,28 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        
+        if let post = post {
+            
+            updateWithPost(post)
+        }
     }
 
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let currentSectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+        guard let numberOfRows = post?.comments?.count else { return 0 }
         
-        return currentSectionInfo.numberOfObjects
+        return numberOfRows
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("postDetailCell", forIndexPath: indexPath)
-
-        guard let comments = post?.comments else { return UITableViewCell() }
         
-        let comment = comments[indexPath.row]
-        
-        cell.textLabel?.text = comment.text
+        configureCell(cell, indexPath: indexPath)
 
         return cell
     }
@@ -112,6 +113,14 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
+    func updateWithPost(post: Post) {
+        
+        guard let imageData = post.photoData else { return }
+        
+        photoImageView.image = UIImage(data: imageData)
+        tableView.reloadData()
+    }
+    
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
 
         guard let comments = post?.comments else { return }
@@ -136,9 +145,9 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let okAction = UIAlertAction(title: "OK", style: .Default) { (_) in
             
-            guard let post = self.post, newPostText = alertController.textFields?[0].text else { return }
+            guard let post = self.post, newPostText = alertController.textFields?[0].text where newPostText.characters.count > 0 else { return }
             
-            let _ = Comment(post: post, text: newPostText)
+            PostController.sharedController.addCommmentToPost(newPostText, post: post)
             self.tableView.reloadData()
         }
         

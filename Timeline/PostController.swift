@@ -17,24 +17,29 @@ class PostController {
     
     let moc = Stack.sharedStack.managedObjectContext
     
+    // MARK: - Initializer(s)
+    
+    init() {
+        
+//        createMockData()
+    }
+    
     // MARK: - Method(s)
     
     func createPost(image: UIImage, caption: String) {
         
         guard let imageData = UIImagePNGRepresentation(image) else { return }
         
-        let now = NSDate()
+        guard let post = Post(photo: imageData) else { return }
         
-        guard let post = Post(photo: imageData, timestamp: now) else { return }
-        
-        _ = Comment(post: post, text: caption, timestamp: now)
+        addCommmentToPost(caption, post: post)
         
         saveContext()
     }
     
     func addCommmentToPost(text: String, post: Post) {
         
-        _ = Comment(post: post, text: text, timestamp: NSDate())
+        _ = Comment(post: post, text: text)
         
         saveContext()
     }
@@ -43,9 +48,35 @@ class PostController {
         
         do {
             try moc.save()
-        } catch {
-            print("Error: Failed to save")
+        } catch let error {
+            print("Error: Failed to save (error: \(error)")
         }
+    }
+    
+    func createMockData() {
+        
+        var mockPosts: [Post] = []
+        
+        guard let cheetahImage = UIImage(named: "cheetah")
+            , let leopardImage = UIImage(named: "leopard")
+            , let tigerImage = UIImage(named: "tiger")
+            , let cheetahImageData = UIImagePNGRepresentation(cheetahImage)
+            , let leopardImageData = UIImagePNGRepresentation(leopardImage)
+            , let tigetImageData = UIImagePNGRepresentation(tigerImage)
+            , let cheetahPost = Post(photo: cheetahImageData)
+            , let leopardPost = Post(photo: leopardImageData)
+            , let tigerPost = Post(photo: tigetImageData)
+            else { return }
+        
+        addCommmentToPost("Cool Cheetah", post: cheetahPost)
+        addCommmentToPost("Cool Leopard", post: leopardPost)
+        addCommmentToPost("Cool Tiger", post: tigerPost)
+        
+        mockPosts.append(cheetahPost)
+        mockPosts.append(leopardPost)
+        mockPosts.append(tigerPost)
+        
+        saveContext()
     }
     
 }
