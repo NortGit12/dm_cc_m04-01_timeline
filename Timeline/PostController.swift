@@ -37,6 +37,13 @@ class PostController {
         saveContext()
     }
     
+    func removePost(post: Post) {
+        
+        moc.deleteObject(post)
+        
+        saveContext()
+    }
+    
     func addCommmentToPost(text: String, post: Post) {
         
         _ = Comment(post: post, text: text)

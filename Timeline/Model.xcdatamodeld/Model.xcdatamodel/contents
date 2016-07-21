@@ -2,11 +2,11 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
     <entity name="Comment" representedClassName=".Comment" parentEntity="SyncableObject" syncable="YES">
         <attribute name="text" attributeType="String" syncable="YES"/>
-        <relationship name="post" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
+        <relationship name="post" maxCount="1" deletionRule="Cascade" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName=".Post" parentEntity="SyncableObject" syncable="YES">
         <attribute name="photoData" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
     </entity>
     <entity name="SyncableObject" representedClassName=".SyncableObject" syncable="YES">
         <attribute name="recordIDData" optional="YES" attributeType="Binary" syncable="YES"/>

@@ -21,6 +21,13 @@ class CloudKitManager {
     let publicDatabase = CKContainer.defaultContainer().publicCloudDatabase
     let privateDatabase = CKContainer.defaultContainer().privateCloudDatabase
     
+    // MARK: - Initializer(s)
+    
+    init() {
+        
+        checkCloudKitAvailability()
+    }
+    
     // MARK: - User Info Discovery
     
     // If I'm logged in it'll fetch my record

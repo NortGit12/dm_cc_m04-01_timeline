@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Post: SyncableObject {
+class Post: SyncableObject, SearchableRecord {
 
     // MARK: - Initializer(s)
     
@@ -29,9 +29,18 @@ class Post: SyncableObject {
     
     func matchesSearchTerm(searchTerm: String) -> Bool {
         
-//        guard let result = self.text?.containsString(searchTerm) else { return false }
+        guard let comments = self.comments else { return false }
         
-        return false
+        var result = false
+        for comment in comments {
+            
+            if comment.matchesSearchTerm(searchTerm) {
+                result = true
+                break
+            }
+        }
+        
+        return result
     }
 
 }

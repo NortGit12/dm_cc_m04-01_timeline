@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 
-class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     // MARK: - Stored Properties
     
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController?
+    var searchController: UISearchController?
     
     // MARK: - General
 
@@ -22,12 +23,21 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
 
         initializeFetchedResultsController()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        setupSearchController()
+
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let currentSectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+        guard let currentSectionInfo = fetchedResultsController?.sections?[section] else { return 0 }
         
         return currentSectionInfo.numberOfObjects
     }
@@ -40,6 +50,16 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         configureCell(cell, indexPath: indexPath)
         
         return cell
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            
+            guard let post = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Post else { return }
+            
+            PostController.sharedController.removePost(post)
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -79,6 +99,36 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         tableView.endUpdates()
     }
     
+    // MARK: - SearchController Methods
+    
+    func setupSearchController() {
+        
+        let searchResultsTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("searchResultsTableViewController")
+        
+        searchController = UISearchController(searchResultsController: searchResultsTableViewController)
+        
+        searchController?.searchResultsUpdater = self
+        searchController?.hidesNavigationBarDuringPresentation = true
+        searchController?.searchBar.placeholder = "Search for a Post..."
+        searchController?.definesPresentationContext = true
+        tableView.tableHeaderView = searchController?.searchBar
+    }
+    
+    // MARK: - UISearchResultsUpdating
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        guard let searchText = searchController.searchBar.text
+            , searchResultsTableViewController = searchController.searchResultsController as? SearchResultsTableViewController
+            , posts = fetchedResultsController?.fetchedObjects as? [Post]
+            else { return }
+        
+        searchResultsTableViewController.postListTableViewController = self
+        
+        searchResultsTableViewController.resultsArray = posts.filter{ $0.matchesSearchTerm(searchText) }
+        searchResultsTableViewController.tableView.reloadData()
+    }
+    
     // MARK: - Methods
     
     func initializeFetchedResultsController() {
@@ -87,9 +137,10 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController?.delegate = self
         
         do {
-            try fetchedResultsController.performFetch()
+            try fetchedResultsController?.performFetch()
         } catch let error as NSError {
             print("Error fetching posts: \(error)")
         }
@@ -97,32 +148,46 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         
-        guard let cell = cell as? PostTableViewCell, post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
+        guard let cell = cell as? PostTableViewCell, post = fetchedResultsController?.objectAtIndexPath(indexPath) as? Post else { return }
         
         cell.updateWithPost(post)
     }
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        // Where are we going?
+        guard let postDetailTableViewController = segue.destinationViewController as? PostDetailTableViewController else { return }
+        
         // How are we getting there?
-        if segue.identifier == "viewPostSegue" {
+        if segue.identifier == "fromListToDetailSegue" {
             
-            // Where are we going?
-            if let postDetailTableViewController = segue.destinationViewController as? PostDetailTableViewController {
+            // What do we need to pack?
+            if let indexPath = tableView.indexPathForSelectedRow {
                 
-                // What do we need to pack?
-                if let indexPath = tableView.indexPathForSelectedRow {
-                    
-                    let post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post
-                    
-                    // Did I finish packing?
-                    postDetailTableViewController.post = post
-                }
+                let post = fetchedResultsController?.objectAtIndexPath(indexPath) as? Post
+                
+                // Did I finish packing?
+                postDetailTableViewController.post = post
             }
+        } else if segue.identifier == "fromSearchToDetailSegue" {
+            
+            // What do I need to pack?
+            guard let cell = sender as? PostTableViewCell
+                , searchResultsTableViewController = searchController?.searchResultsController as? SearchResultsTableViewController
+                , tableView = searchResultsTableViewController.tableView
+                , indexPath = tableView.indexPathForCell(cell)
+                , posts = searchResultsTableViewController.resultsArray as? [Post]
+            else { return }
+            
+            let post = posts[indexPath.row]
+            
+            // Did I finish packing?
+            postDetailTableViewController.post = post
+            
+            searchResultsTableViewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
 

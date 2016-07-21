@@ -20,8 +20,6 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
     
     var post: Post?
     
-    var fetchedResultsController: NSFetchedResultsController!
-    
     // MARK: - General
 
     override func viewDidLoad() {

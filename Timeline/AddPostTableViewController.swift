@@ -18,24 +18,12 @@ class AddPostTableViewController: UITableViewController {
     @IBOutlet weak var captionTextField: UITextField!
     @IBOutlet weak var addPostButton: UIButton!
     
-    // MARK: - General
-
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 1
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
     
     // MARK: - Action(s)
     
@@ -48,7 +36,8 @@ class AddPostTableViewController: UITableViewController {
     
     @IBAction func addPostButtonTapped(sender: UIButton) {
         
-        guard let image = imageView.image, imageData = UIImagePNGRepresentation(image), captionText = captionTextField.text, post = Post(photo: imageData) else {
+//        guard let image = imageView.image, imageData = UIImagePNGRepresentation(image), captionText = captionTextField.text else {
+        guard let image = imageView.image, captionText = captionTextField.text else {
         
             let missingInfoAlert = UIAlertController(title: "Error - Missing Required Elements", message: "The photo and caption are required.  Make sure they are provided and try again.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -58,7 +47,8 @@ class AddPostTableViewController: UITableViewController {
             return
         }
         
-        PostController.sharedController.addCommmentToPost(captionText, post: post)
+        PostController.sharedController.createPost(image, caption: captionText)
+//        PostController.sharedController.addCommmentToPost(captionText, post: post)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
