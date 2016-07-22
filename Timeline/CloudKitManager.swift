@@ -1,8 +1,8 @@
 //
-//  CloudKitManger.swift
+//  CloudKitManager.swift
 //  Timeline
 //
-//  Created by Jeff Norton on 7/19/16.
+//  Created by Jeff Norton on 7/22/16.
 //  Copyright © 2016 DevMountain. All rights reserved.
 //
 
@@ -102,7 +102,7 @@ class CloudKitManager {
         
         var fetchedRecords: [CKRecord] = []
         
-//        let predicate = predicate (not needed?)
+        //        let predicate = predicate (not needed?)
         let query = CKQuery(recordType: type, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         
@@ -194,7 +194,7 @@ class CloudKitManager {
     // MARK: - Save and Modify
     
     func saveRecord(record: CKRecord, completion: ((record: CKRecord?, error: NSError?) -> Void)?) {
-    
+        
         publicDatabase.saveRecord(record) { (record, error) in
             
             if let completion = completion {

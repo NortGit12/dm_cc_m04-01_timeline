@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1F05095F1D4048CD00740D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F05095D1D4048CD00740D96 /* Main.storyboard */; };
-		1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */; };
 		1F05CA881D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA821D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift */; };
 		1F05CA891D3ED996002AD1DD /* SyncableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA831D3ED996002AD1DD /* SyncableObject.swift */; };
 		1F05CA8A1D3ED996002AD1DD /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA841D3ED996002AD1DD /* Comment+CoreDataProperties.swift */; };
@@ -25,6 +24,8 @@
 		1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25C01D3D713500F4DBFD /* Stack.swift */; };
 		1F4D25D41D3D7A3200F4DBFD /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D31D3D7A3200F4DBFD /* PostController.swift */; };
 		1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */; };
+		1FC6BAA11D427C6900917126 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6BAA01D427C6900917126 /* CloudKitManager.swift */; };
+		1FC6BAA41D427D2A00917126 /* CloudKitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6BAA31D427D2A00917126 /* CloudKitManagedObject.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
 		68658B2F1CF8A1D60016C5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2E1CF8A1D60016C5CD /* Assets.xcassets */; };
 		68658B321CF8A1D60016C5CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */; };
@@ -51,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		1F05095E1D4048CD00740D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManger.swift; sourceTree = "<group>"; };
 		1F05CA821D3ED996002AD1DD /* SyncableObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyncableObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F05CA831D3ED996002AD1DD /* SyncableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncableObject.swift; sourceTree = "<group>"; };
 		1F05CA841D3ED996002AD1DD /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -68,6 +68,8 @@
 		1F4D25C01D3D713500F4DBFD /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		1F4D25D31D3D7A3200F4DBFD /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		1FC6BAA01D427C6900917126 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		1FC6BAA31D427D2A00917126 /* CloudKitManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManagedObject.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68658B271CF8A1D60016C5CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68658B2E1CF8A1D60016C5CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,6 +146,22 @@
 			name = ModelController;
 			sourceTree = "<group>";
 		};
+		1FC6BAA21D427C7800917126 /* OtherController */ = {
+			isa = PBXGroup;
+			children = (
+				1FC6BAA01D427C6900917126 /* CloudKitManager.swift */,
+			);
+			name = OtherController;
+			sourceTree = "<group>";
+		};
+		1FC6BAA51D427D2E00917126 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1FC6BAA31D427D2A00917126 /* CloudKitManagedObject.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 		68658B1B1CF8A1D60016C5CD = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +189,9 @@
 				1F4D25CA1D3D736000F4DBFD /* Model + CoreData */,
 				1F4D25D51D3D7A4100F4DBFD /* ModelController */,
 				1F4D25B61D3D6E8000F4DBFD /* ViewController */,
+				1FC6BAA21D427C7800917126 /* OtherController */,
+				1FC6BAA51D427D2E00917126 /* Protocol */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
-				1F05CA7C1D3E8A3D002AD1DD /* CloudKitManger.swift */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
 				68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */,
 				1F05095D1D4048CD00740D96 /* Main.storyboard */,
@@ -331,14 +350,15 @@
 			files = (
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
 				1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */,
-				1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */,
 				1F05CA8B1D3ED996002AD1DD /* Comment.swift in Sources */,
 				1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */,
 				1F3F77351D41CFE500945596 /* PhotoSelectViewController.swift in Sources */,
 				1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */,
 				1F05CA8A1D3ED996002AD1DD /* Comment+CoreDataProperties.swift in Sources */,
+				1FC6BAA11D427C6900917126 /* CloudKitManager.swift in Sources */,
 				1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */,
 				1F05CA8C1D3ED996002AD1DD /* Post+CoreDataProperties.swift in Sources */,
+				1FC6BAA41D427D2A00917126 /* CloudKitManagedObject.swift in Sources */,
 				1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */,
 				1F05CA891D3ED996002AD1DD /* SyncableObject.swift in Sources */,
 				1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */,
