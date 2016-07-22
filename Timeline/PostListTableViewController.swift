@@ -118,7 +118,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-        guard let searchText = searchController.searchBar.text
+        guard let searchText = searchController.searchBar.text?.lowercaseString
             , searchResultsTableViewController = searchController.searchResultsController as? SearchResultsTableViewController
             , posts = fetchedResultsController?.fetchedObjects as? [Post]
             else { return }

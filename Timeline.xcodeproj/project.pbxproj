@@ -16,6 +16,7 @@
 		1F05CA8C1D3ED996002AD1DD /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */; };
 		1F05CA8D1D3ED996002AD1DD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05CA871D3ED996002AD1DD /* Post.swift */; };
 		1F0B10E01D3FA213009977EC /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B10DF1D3FA213009977EC /* SearchableRecord.swift */; };
+		1F3F77351D41CFE500945596 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F77341D41CFE500945596 /* PhotoSelectViewController.swift */; };
 		1F4D25B51D3D6E7C00F4DBFD /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */; };
 		1F4D25B81D3D6EBE00F4DBFD /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */; };
 		1F4D25BA1D3D6F3900F4DBFD /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */; };
@@ -58,6 +59,7 @@
 		1F05CA861D3ED996002AD1DD /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F05CA871D3ED996002AD1DD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1F0B10DF1D3FA213009977EC /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
+		1F3F77341D41CFE500945596 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		1F4D25B41D3D6E7C00F4DBFD /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				1F4D25D61D3D840D00F4DBFD /* PostTableViewCell.swift */,
 				1F4D25B71D3D6EBE00F4DBFD /* PostDetailTableViewController.swift */,
 				1F4D25B91D3D6F3900F4DBFD /* AddPostTableViewController.swift */,
+				1F3F77341D41CFE500945596 /* PhotoSelectViewController.swift */,
 				1F4D25BB1D3D705F00F4DBFD /* SearchResultsTableViewController.swift */,
 			);
 			name = ViewController;
@@ -331,6 +334,7 @@
 				1F05CA7D1D3E8A3D002AD1DD /* CloudKitManger.swift in Sources */,
 				1F05CA8B1D3ED996002AD1DD /* Comment.swift in Sources */,
 				1F4D25D71D3D840D00F4DBFD /* PostTableViewCell.swift in Sources */,
+				1F3F77351D41CFE500945596 /* PhotoSelectViewController.swift in Sources */,
 				1F4D25C11D3D713500F4DBFD /* Stack.swift in Sources */,
 				1F05CA8A1D3ED996002AD1DD /* Comment+CoreDataProperties.swift in Sources */,
 				1F4D25BC1D3D705F00F4DBFD /* SearchResultsTableViewController.swift in Sources */,

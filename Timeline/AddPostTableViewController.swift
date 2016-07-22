@@ -13,33 +13,20 @@ class AddPostTableViewController: UITableViewController {
     // MARK: - Stored Properties
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var selectImageButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var captionTextField: UITextField!
     @IBOutlet weak var addPostButton: UIButton!
     
-    // MARK: - Table view data source
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 1
-    }
+    weak var imageViewController: UIViewController?
+    
+    var image: UIImage?
     
     // MARK: - Action(s)
     
-    @IBAction func selectImageButtonTapped(sender: UIButton) {
-        
-        imageView.image = UIImage(named: "default-image")
-        
-        selectImageButton.titleLabel?.text = ""
-    }
-    
     @IBAction func addPostButtonTapped(sender: UIButton) {
         
-//        guard let image = imageView.image, imageData = UIImagePNGRepresentation(image), captionText = captionTextField.text else {
-        guard let image = imageView.image, captionText = captionTextField.text else {
+        guard let image = image, captionText = captionTextField.text else {
         
-            let missingInfoAlert = UIAlertController(title: "Error - Missing Required Elements", message: "The photo and caption are required.  Make sure they are provided and try again.", preferredStyle: .Alert)
+            let missingInfoAlert = UIAlertController(title: "Error - Missing Required Elements", message: "The photo and caption are required.  Make sure they are both provided and try again.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             missingInfoAlert.addAction(okAction)
             presentViewController(missingInfoAlert, animated: true, completion: nil)
@@ -48,7 +35,6 @@ class AddPostTableViewController: UITableViewController {
         }
         
         PostController.sharedController.createPost(image, caption: captionText)
-//        PostController.sharedController.addCommmentToPost(captionText, post: post)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -57,5 +43,24 @@ class AddPostTableViewController: UITableViewController {
         
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "embedSegueToImageContainer" {
+            
+            let embedViewController = segue.destinationViewController as? PhotoSelectViewController
+            embedViewController?.delegate = self
+        }
+    }
 
+}
+
+extension AddPostTableViewController: PhotoSelectViewControllerDelegate {
+    
+    func photoSelectViewControllerSelected(image: UIImage) {
+        
+        self.image = image
+    }
 }

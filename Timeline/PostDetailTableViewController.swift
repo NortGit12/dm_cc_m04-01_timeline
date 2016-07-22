@@ -14,7 +14,7 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
     // MARK: - Stored Properties
     
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var commenBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var commentBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var followPostBarButtonItem: UIBarButtonItem!
     
@@ -156,7 +156,16 @@ class PostDetailTableViewController: UITableViewController, NSFetchedResultsCont
     
     @IBAction func shareButtonTapped(sender: UIBarButtonItem) {
         
-        
+        if let post = post {
+            
+            guard let image = UIImage(data: post.photoData)
+                , captionText = post.comments?[0].text
+            else { return }
+            
+            let shareActivityViewController = UIActivityViewController(activityItems: [image, captionText], applicationActivities: nil)
+            
+            presentViewController(shareActivityViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func followButtonTapped(sender: UIBarButtonItem) {
