@@ -12,6 +12,14 @@
 		1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */; };
 		1F724B991D46A1DD0011873D /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B981D46A1DD0011873D /* AddPostTableViewController.swift */; };
 		1F724B9B1D46A4750011873D /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B9A1D46A4750011873D /* CustomTableViewCell.swift */; };
+		1F724B9E1D46A4CB0011873D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */; };
+		1F724BA61D46A6580011873D /* SyncableObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA01D46A6580011873D /* SyncableObject+CoreDataProperties.swift */; };
+		1F724BA71D46A6580011873D /* SyncableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA11D46A6580011873D /* SyncableObject.swift */; };
+		1F724BA81D46A6580011873D /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA21D46A6580011873D /* Post+CoreDataProperties.swift */; };
+		1F724BA91D46A6580011873D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA31D46A6580011873D /* Post.swift */; };
+		1F724BAA1D46A6580011873D /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */; };
+		1F724BAB1D46A6580011873D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA51D46A6580011873D /* Comment.swift */; };
+		1F724BAD1D46A75A0011873D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BAC1D46A75A0011873D /* Stack.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
 		68658B2D1CF8A1D60016C5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2B1CF8A1D60016C5CD /* Main.storyboard */; };
 		68658B2F1CF8A1D60016C5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2E1CF8A1D60016C5CD /* Assets.xcassets */; };
@@ -43,6 +51,14 @@
 		1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		1F724B981D46A1DD0011873D /* AddPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
 		1F724B9A1D46A4750011873D /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		1F724B9D1D46A4CB0011873D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		1F724BA01D46A6580011873D /* SyncableObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyncableObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F724BA11D46A6580011873D /* SyncableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncableObject.swift; sourceTree = "<group>"; };
+		1F724BA21D46A6580011873D /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F724BA31D46A6580011873D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F724BA51D46A6580011873D /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		1F724BAC1D46A75A0011873D /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68658B271CF8A1D60016C5CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68658B2C1CF8A1D60016C5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +110,20 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		1F724B9F1D46A4D30011873D /* Model+CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1F724BA01D46A6580011873D /* SyncableObject+CoreDataProperties.swift */,
+				1F724BA11D46A6580011873D /* SyncableObject.swift */,
+				1F724BA21D46A6580011873D /* Post+CoreDataProperties.swift */,
+				1F724BA31D46A6580011873D /* Post.swift */,
+				1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */,
+				1F724BA51D46A6580011873D /* Comment.swift */,
+				1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */,
+			);
+			name = "Model+CoreData";
+			sourceTree = "<group>";
+		};
 		68658B1B1CF8A1D60016C5CD = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				68658B271CF8A1D60016C5CD /* AppDelegate.swift */,
+				1F724BAC1D46A75A0011873D /* Stack.swift */,
+				1F724B9F1D46A4D30011873D /* Model+CoreData */,
 				1F724B931D46A1B30011873D /* ViewController */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
@@ -277,10 +309,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F724B9B1D46A4750011873D /* CustomTableViewCell.swift in Sources */,
+				1F724BA91D46A6580011873D /* Post.swift in Sources */,
+				1F724BAD1D46A75A0011873D /* Stack.swift in Sources */,
 				1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */,
 				1F724B991D46A1DD0011873D /* AddPostTableViewController.swift in Sources */,
+				1F724BA81D46A6580011873D /* Post+CoreDataProperties.swift in Sources */,
+				1F724B9E1D46A4CB0011873D /* Model.xcdatamodeld in Sources */,
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
+				1F724BA61D46A6580011873D /* SyncableObject+CoreDataProperties.swift in Sources */,
+				1F724BAB1D46A6580011873D /* Comment.swift in Sources */,
 				1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */,
+				1F724BA71D46A6580011873D /* SyncableObject.swift in Sources */,
+				1F724BAA1D46A6580011873D /* Comment+CoreDataProperties.swift in Sources */,
 				1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +569,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F724B9D1D46A4CB0011873D /* Model.xcdatamodel */,
+			);
+			currentVersion = 1F724B9D1D46A4CB0011873D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 68658B1C1CF8A1D60016C5CD /* Project object */;
 }
