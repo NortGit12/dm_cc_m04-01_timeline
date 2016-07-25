@@ -5,19 +5,19 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Post List Table View Controller-->
         <scene sceneID="neF-5a-EgX">
             <objects>
-                <tableViewController id="MP5-27-mT2" sceneMemberID="viewController">
+                <tableViewController id="MP5-27-mT2" customClass="PostListTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dL7-wh-G4J">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mzL-7I-BeJ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" id="j4u-ra-wJA" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mzL-7I-BeJ" id="1lN-7g-IG0">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j4u-ra-wJA" id="2og-AX-Ig5">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -28,26 +28,32 @@
                             <outlet property="delegate" destination="MP5-27-mT2" id="DTz-Aq-7B2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rzg-b9-y0O"/>
+                    <navigationItem key="navigationItem" id="rzg-b9-y0O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0lk-ml-N1n">
+                            <connections>
+                                <segue destination="vkg-gj-0Bh" kind="show" id="xwN-K2-bT8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNf-xV-0ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="830" y="352"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Search Results Table View Controller-->
         <scene sceneID="gpP-aA-xE2">
             <objects>
-                <tableViewController id="Ky6-aS-6Xg" sceneMemberID="viewController">
+                <tableViewController id="Ky6-aS-6Xg" customClass="SearchResultsTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3L-gq-ThQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="U1v-VG-OK5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" id="Nw5-Qq-vz8" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1v-VG-OK5" id="F2A-ew-r1i">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nw5-Qq-vz8" id="Rco-RK-sZZ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -64,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="830" y="1011"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Post Detail Table View Controller-->
         <scene sceneID="HCz-kl-eRe">
             <objects>
-                <tableViewController id="s2H-LN-J9I" sceneMemberID="viewController">
+                <tableViewController id="s2H-LN-J9I" customClass="PostDetailTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lXb-6s-1cX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="1247" y="352"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Add Post Table View Controller-->
         <scene sceneID="H1A-At-nPA">
             <objects>
-                <tableViewController id="vkg-gj-0Bh" sceneMemberID="viewController">
+                <tableViewController id="vkg-gj-0Bh" customClass="AddPostTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jak-xP-mhV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +127,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcG-tL-m4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1699" y="-290"/>
+            <point key="canvasLocation" x="1247" y="-296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QqD-PT-cu6">
@@ -159,7 +165,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nb9-Qe-dET" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1247" y="-290"/>
+            <point key="canvasLocation" x="830" y="-296"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="xwN-K2-bT8"/>
+    </inferredMetricsTieBreakers>
 </document>
