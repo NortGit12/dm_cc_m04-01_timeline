@@ -12,7 +12,7 @@ class CustomTableViewCell: UITableViewCell {
 
     // MARK: - Stored Properties
     
-    @IBOutlet weak var postImageView: UIImageView?
+    @IBOutlet weak var postImageView: UIImageView!
     
     // MARK: - General
     
@@ -28,7 +28,7 @@ class CustomTableViewCell: UITableViewCell {
     
     func updateWithPost(post: Post) {
         
-        postImageView?.image = UIImage(data: post.photoData)
+        postImageView.image = UIImage(data: post.photoData)
     }
 
 }

@@ -15,6 +15,6 @@ import CoreData
 extension Post {
 
     @NSManaged var photoData: NSData
-    @NSManaged var comments: NSSet?
+    @NSManaged var comments: NSOrderedSet?
 
 }
