@@ -9,18 +9,32 @@
         <scene sceneID="neF-5a-EgX">
             <objects>
                 <tableViewController id="MP5-27-mT2" customClass="PostListTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dL7-wh-G4J">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="244" sectionHeaderHeight="28" sectionFooterHeight="28" id="dL7-wh-G4J">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" id="j4u-ra-wJA" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" rowHeight="244" id="j4u-ra-wJA" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="244"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j4u-ra-wJA" id="2og-AX-Ig5">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="243.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tmj-oJ-8Dp">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="243.5"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="tmj-oJ-8Dp" secondAttribute="trailing" id="88I-DD-tQh"/>
+                                        <constraint firstAttribute="bottom" secondItem="tmj-oJ-8Dp" secondAttribute="bottom" id="E0g-cT-wfe"/>
+                                        <constraint firstItem="tmj-oJ-8Dp" firstAttribute="top" secondItem="2og-AX-Ig5" secondAttribute="top" id="Ivd-jA-Hhq"/>
+                                        <constraint firstItem="tmj-oJ-8Dp" firstAttribute="leading" secondItem="2og-AX-Ig5" secondAttribute="leading" id="s24-tJ-S6M"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="s2H-LN-J9I" kind="show" identifier="listToDetailSegue" id="tFC-i5-XgY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -29,11 +43,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="rzg-b9-y0O">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0lk-ml-N1n">
-                            <connections>
-                                <segue destination="vkg-gj-0Bh" kind="show" id="xwN-K2-bT8"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0lk-ml-N1n"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
@@ -45,17 +55,28 @@
         <scene sceneID="gpP-aA-xE2">
             <objects>
                 <tableViewController id="Ky6-aS-6Xg" customClass="SearchResultsTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3L-gq-ThQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="244" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3L-gq-ThQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" id="Nw5-Qq-vz8" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="244" id="Nw5-Qq-vz8" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="244"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nw5-Qq-vz8" id="Rco-RK-sZZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="243.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aFi-gk-bab">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="243.5"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aFi-gk-bab" firstAttribute="leading" secondItem="Rco-RK-sZZ" secondAttribute="leading" id="DJy-ri-g7F"/>
+                                        <constraint firstAttribute="bottom" secondItem="aFi-gk-bab" secondAttribute="bottom" id="RuZ-31-k1g"/>
+                                        <constraint firstItem="aFi-gk-bab" firstAttribute="top" secondItem="Rco-RK-sZZ" secondAttribute="top" id="ejU-l7-BWG"/>
+                                        <constraint firstAttribute="trailing" secondItem="aFi-gk-bab" secondAttribute="trailing" id="pdl-ZM-C0U"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -80,7 +101,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ec0-9P-bSm">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ec0-9P-bSm" id="zba-8R-Jat">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -168,7 +189,4 @@
             <point key="canvasLocation" x="830" y="-296"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="xwN-K2-bT8"/>
-    </inferredMetricsTieBreakers>
 </document>

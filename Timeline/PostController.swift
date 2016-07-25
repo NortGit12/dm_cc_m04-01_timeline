@@ -43,7 +43,7 @@ class PostController {
             try moc.save()
         } catch {
             let errorMessge = "Error: Saving the context failed."
-            print("errorMessge")
+            print("\(errorMessge)")
             NSLog(errorMessge)
         }
     }
