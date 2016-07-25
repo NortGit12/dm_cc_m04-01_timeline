@@ -34,6 +34,18 @@ class PostDetailTableViewController: UITableViewController {
         }
     }
     
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        do {
+//            try fetchedResultsController?.performFetch()
+//        } catch {
+//            print("Error: Latest comments could not be fetched")
+//        }
+//        
+//        tableView.reloadData()
+//    }
+    
     // MARK: - Method(s)
     
     func initializeFetchedResultsController() {
@@ -103,12 +115,18 @@ class PostDetailTableViewController: UITableViewController {
             guard let post = self.post, text = commentAlertController.textFields?[0].text where text.characters.count > 0 else { return }
             
             PostController.sharedController.addCommentToPost(text, post: post)
+            
+            do {
+                try self.fetchedResultsController?.performFetch()
+            } catch {
+                print("Error: Latest comments could not be fetched")
+            }
+            
+            self.tableView.reloadData()
         }
         
         commentAlertController.addAction(cancelAction)
         commentAlertController.addAction(okAction)
-        
-        tableView.reloadData()
         
         presentViewController(commentAlertController, animated: true, completion: nil)
     }

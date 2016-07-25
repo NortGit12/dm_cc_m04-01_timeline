@@ -9,36 +9,60 @@
 import UIKit
 
 class AddPostTableViewController: UITableViewController {
+    
+    // MARK: - Stored Properties
+    
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var selectImageButton: UIButton!
+    @IBOutlet weak var captionTextField: UITextField!
+    
+    // MARK: - General
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+    // MARK: - Action(s)
+    
+    @IBAction func selectImageButtonTapped(sender: UIButton) {
         
+        guard let image = UIImage(named: "default-image") else {
+            print("Error loading image")
+            return
+        }
+        
+        postImageView.image = image
+        tableView.reloadData()
     }
-
-    // MARK: - Table view data source
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    @IBAction func addPostButtonTapped(sender: UIButton) {
+        
+        selectImageButton.titleLabel?.text = ""
+        
+        guard let image = postImageView.image
+            , let text = captionTextField.text where text.characters.count > 0
+        else {
+        
+            let missingElementsAlertController = UIAlertController(title: "Missing Required Elements", message: "A Post needs an image and a caption.  Make sure you have provided both and try again.", preferredStyle: .Alert)
+            
+            let tryAgainAction = UIAlertAction(title: "Try Again", style: .Default, handler: nil)
+            
+            missingElementsAlertController.addAction(tryAgainAction)
+            
+            self.presentViewController(missingElementsAlertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        PostController.sharedController.createPost(image, caption: text)
+        tableView.reloadData()
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    @IBAction func cancelButtonTapped(sender: UIBarButtonItem) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
 }

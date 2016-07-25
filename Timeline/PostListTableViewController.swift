@@ -13,7 +13,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     // MARK: - Stored Properties
     
-    var fetchedResultsController: NSFetchedResultsController
+    var fetchedResultsController: NSFetchedResultsController?
     
     // MARK: - General
 
@@ -23,6 +23,12 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         initializeFetchedResultsController()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     // MARK: - Method(s)
     
     func initializeFetchedResultsController() {
@@ -30,11 +36,11 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         let request = NSFetchRequest(entityName: "Post")
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: Stack.sharedStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController?.delegate = self
         
         do {
-            try fetchedResultsController.performFetch()
+            try fetchedResultsController?.performFetch()
         } catch let error as NSError {
             let errorMessage = "Error fetching posts.  \(error)"
             print("\(errorMessage)")
@@ -44,7 +50,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         
-        guard let cell = cell as? CustomTableViewCell, post = fetchedResultsController.objectAtIndexPath(indexPath) as? Post else { return }
+        guard let cell = cell as? CustomTableViewCell, post = fetchedResultsController?.objectAtIndexPath(indexPath) as? Post else { return }
         
         cell.updateWithPost(post)
     }
@@ -53,41 +59,33 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        return fetchedResultsController?.fetchedObjects?.count ?? 0
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
         guard let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as? CustomTableViewCell
-            , post = fetchedResultsController.fetchedObjects?[indexPath.row] as? Post
+            , post = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Post
         else { return UITableViewCell() }
 
         cell.updateWithPost(post)
 
         return cell
     }
+
+
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+            guard let post = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Post else { return }
+            
+            PostController.sharedController.deletePost(post)
+        }
     }
-    */
+ 
     
     // MARK: - NSFetchedResultsControllerDelegate
     
@@ -141,7 +139,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                 // What do I need to pack?
                 if let index = tableView.indexPathForSelectedRow?.row {
                 
-                    let post = fetchedResultsController.fetchedObjects?[index] as? Post
+                    let post = fetchedResultsController?.fetchedObjects?[index] as? Post
                 
                     // Am I finished packing?
                     detailTableviewController.post = post

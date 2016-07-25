@@ -17,15 +17,20 @@ class PostController {
     
     // MARK: - Initialier(s)
     
-    
+    init() {
+        
+//        generateMockData()
+    }
     
     // MARK: - Method(s)
     
     func createPost(image: UIImage, caption: String) {
         
-        guard let image = UIImageJPEGRepresentation(image, 0.75) else { return }
+        guard let image = UIImageJPEGRepresentation(image, 0.75)
+            , post = Post(photoData: image)
+        else { return }
         
-        _ = Post(photoData: image)
+        _ = Comment(text: caption, post: post)
         
         saveContext()
     }
@@ -33,6 +38,13 @@ class PostController {
     func addCommentToPost(text: String, post: Post) {
         
         _ = Comment(text: text, post: post)
+        
+        saveContext()
+    }
+    
+    func deletePost(post: Post) {
+        
+        moc.deleteObject(post)
         
         saveContext()
     }
@@ -46,5 +58,12 @@ class PostController {
             print("\(errorMessge)")
             NSLog(errorMessge)
         }
+    }
+    
+    func generateMockData() {
+        
+        createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")
+        createPost(UIImage(named: "leopard")!, caption: "Cool leopard")
+        createPost(UIImage(named: "tiger")!, caption: "Cool tiger")
     }
 }
