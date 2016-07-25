@@ -20,6 +20,7 @@
 		1F724BAA1D46A6580011873D /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */; };
 		1F724BAB1D46A6580011873D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BA51D46A6580011873D /* Comment.swift */; };
 		1F724BAD1D46A75A0011873D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BAC1D46A75A0011873D /* Stack.swift */; };
+		1F724BAF1D46AAB80011873D /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724BAE1D46AAB80011873D /* PostController.swift */; };
 		68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68658B271CF8A1D60016C5CD /* AppDelegate.swift */; };
 		68658B2D1CF8A1D60016C5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2B1CF8A1D60016C5CD /* Main.storyboard */; };
 		68658B2F1CF8A1D60016C5CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68658B2E1CF8A1D60016C5CD /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F724BA51D46A6580011873D /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1F724BAC1D46A75A0011873D /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		1F724BAE1D46AAB80011873D /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		68658B241CF8A1D60016C5CD /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68658B271CF8A1D60016C5CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68658B2C1CF8A1D60016C5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			name = "Model+CoreData";
 			sourceTree = "<group>";
 		};
+		1F724BB01D46AAC30011873D /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				1F724BAE1D46AAB80011873D /* PostController.swift */,
+			);
+			name = ModelController;
+			sourceTree = "<group>";
+		};
 		68658B1B1CF8A1D60016C5CD = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +160,7 @@
 				68658B271CF8A1D60016C5CD /* AppDelegate.swift */,
 				1F724BAC1D46A75A0011873D /* Stack.swift */,
 				1F724B9F1D46A4D30011873D /* Model+CoreData */,
+				1F724BB01D46AAC30011873D /* ModelController */,
 				1F724B931D46A1B30011873D /* ViewController */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
@@ -313,6 +324,7 @@
 				1F724BAD1D46A75A0011873D /* Stack.swift in Sources */,
 				1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */,
 				1F724B991D46A1DD0011873D /* AddPostTableViewController.swift in Sources */,
+				1F724BAF1D46AAB80011873D /* PostController.swift in Sources */,
 				1F724BA81D46A6580011873D /* Post+CoreDataProperties.swift in Sources */,
 				1F724B9E1D46A4CB0011873D /* Model.xcdatamodeld in Sources */,
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
