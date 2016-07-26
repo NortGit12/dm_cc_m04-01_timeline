@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F12092E1D47F2DD00795D02 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */; };
 		1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B911D46A1AB0011873D /* PostListTableViewController.swift */; };
 		1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */; };
 		1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		1F724B911D46A1AB0011873D /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F12092F1D47F2EA00795D02 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		1F724B931D46A1B30011873D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +172,7 @@
 				1F724B9F1D46A4D30011873D /* Model+CoreData */,
 				1F724BB01D46AAC30011873D /* ModelController */,
 				1F724B931D46A1B30011873D /* ViewController */,
+				1F12092F1D47F2EA00795D02 /* Protocols */,
 				68658B2E1CF8A1D60016C5CD /* Assets.xcassets */,
 				68658B331CF8A1D60016C5CD /* Info.plist */,
 				68658B301CF8A1D60016C5CD /* LaunchScreen.storyboard */,
@@ -329,6 +340,7 @@
 				1F724B9E1D46A4CB0011873D /* Model.xcdatamodeld in Sources */,
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
 				1F724BA61D46A6580011873D /* SyncableObject+CoreDataProperties.swift in Sources */,
+				1F12092E1D47F2DD00795D02 /* SearchableRecord.swift in Sources */,
 				1F724BAB1D46A6580011873D /* Comment.swift in Sources */,
 				1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */,
 				1F724BA71D46A6580011873D /* SyncableObject.swift in Sources */,

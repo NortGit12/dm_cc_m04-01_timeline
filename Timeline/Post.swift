@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Post: SyncableObject {
+class Post: SyncableObject, SearchableRecord {
     
     // MARK: - Stored Properties
     
@@ -28,5 +28,23 @@ class Post: SyncableObject {
         self.timestamp = timestamp
         self.recordName = NSUUID().UUIDString
     }
+    
+    // MARK: - SearchableRecord
 
+    func matchesSearchTerm(searchTerm: String) -> Bool {
+        
+        var commentsMatch = false
+        guard let comments = comments else { return false }
+        for comment in comments {
+            
+            guard let comment = comment as? Comment else { break }
+            
+            if comment.text.containsString(searchTerm) {
+                commentsMatch = true
+                return commentsMatch
+            }
+        }
+        
+        return commentsMatch
+    }
 }

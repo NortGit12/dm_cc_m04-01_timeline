@@ -10,12 +10,8 @@ import Foundation
 import CoreData
 
 
-class Comment: SyncableObject {
+class Comment: SyncableObject, SearchableRecord {
 
-    // MARK: - Stored Properties
-    
-    
-    
     // MARK: - Initializers
     
     convenience init?(text: String, post: Post, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
@@ -28,5 +24,11 @@ class Comment: SyncableObject {
         self.post = post
         self.timestamp = timestamp
         self.recordName = NSUUID().UUIDString
+    }
+    
+    // MARK: - SearchableRecord
+    func matchesSearchTerm(searchTerm: String) -> Bool {
+        
+        return text.containsString(searchTerm)
     }
 }
