@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 
-class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     // MARK: - Stored Properties
     
     var fetchedResultsController: NSFetchedResultsController?
+    var searchController: UISearchController?
     
     // MARK: - General
 
@@ -21,6 +22,8 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         super.viewDidLoad()
 
         initializeFetchedResultsController()
+        
+        setUpSearchController()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,6 +56,32 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         guard let cell = cell as? CustomTableViewCell, post = fetchedResultsController?.objectAtIndexPath(indexPath) as? Post else { return }
         
         cell.updateWithPost(post)
+    }
+    
+    func setUpSearchController() {
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let resultsController = storyboard.instantiateViewControllerWithIdentifier("resultsTableViewController")
+        
+        searchController = UISearchController(searchResultsController: resultsController)
+        searchController?.searchResultsUpdater = self
+        searchController?.hidesNavigationBarDuringPresentation = true
+        searchController?.searchBar.placeholder = "Search comments..."
+        searchController?.definesPresentationContext = true
+        tableView.tableHeaderView = searchController?.searchBar
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        guard let searchTermLowercase = searchController.searchBar.text?.lowercaseString
+            , searchResultsController = searchController.searchResultsController as? SearchResultsTableViewController
+            , posts = fetchedResultsController?.fetchedObjects as? [Post]
+        else { return }
+        
+        let resultsArray = posts.filter{ $0.matchesSearchTerm(searchTermLowercase) }
+        
+        searchResultsController.resultsArray = resultsArray
+        searchResultsController.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -134,7 +163,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "listToDetailSegue" {
             
             // Where am I going?
-            if let detailTableviewController = segue.destinationViewController as? PostDetailTableViewController {
+            if let postDetailTableviewController = segue.destinationViewController as? PostDetailTableViewController {
                 
                 // What do I need to pack?
                 if let index = tableView.indexPathForSelectedRow?.row {
@@ -142,8 +171,24 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                     let post = fetchedResultsController?.fetchedObjects?[index] as? Post
                 
                     // Am I finished packing?
-                    detailTableviewController.post = post
+                    postDetailTableviewController.post = post
                 }
+            }
+        } else if segue.identifier == "searchResultsToDetailSegue" {
+            
+            // Where am I going?
+            if let postDetailViewController = segue.destinationViewController as? PostDetailTableViewController {
+                
+                // What do I need to pack?
+                guard let cell = sender as? CustomTableViewCell
+                    , searchResultsController = searchController?.searchResultsController as? SearchResultsTableViewController
+                    , searchResultsTableView = searchResultsController.tableView
+                    , searchResultsIndexPath = searchResultsTableView.indexPathForCell(cell)
+                    , post = searchResultsController.resultsArray?[searchResultsIndexPath.row] as? Post
+                else { return }
+                
+                // Am I finished packing
+                postDetailViewController.post = post
             }
         }
     }

@@ -65,7 +65,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="244" id="Nw5-Qq-vz8" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" rowHeight="244" id="Nw5-Qq-vz8" customClass="CustomTableViewCell" customModule="Timeline" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="244"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nw5-Qq-vz8" id="Rco-RK-sZZ">
@@ -84,7 +84,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="postImageView" destination="aFi-gk-bab" id="d23-Ki-MTJ"/>
+                                    <outlet property="postImageView" destination="aFi-gk-bab" id="UZX-Wu-UWz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

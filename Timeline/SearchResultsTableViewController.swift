@@ -9,39 +9,45 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController {
+    
+    // MARK: - Stored Properties
+    
+    @IBOutlet weak var postImageView: UIImageView!
+    
+    var resultsArray: [SearchableRecord]?
 
+    // MARK: - General
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
     }
-
+    
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return resultsArray?.count ?? 0
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
+    
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("searchResultCell", forIndexPath: indexPath) as? CustomTableViewCell
+            , post = resultsArray?[indexPath.row] as? Post
+        else { return UITableViewCell() }
+        
+        cell.postImageView.image = UIImage(data: post.photoData)
 
         return cell
     }
-    */
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+        
+        presentingViewController?.performSegueWithIdentifier("searchResultsToDetailSegue", sender: cell)
     }
-    */
 
 }

@@ -33,18 +33,19 @@ class Post: SyncableObject, SearchableRecord {
 
     func matchesSearchTerm(searchTerm: String) -> Bool {
         
-        var commentsMatch = false
         guard let comments = comments else { return false }
+        
+        var result = false
         for comment in comments {
             
             guard let comment = comment as? Comment else { break }
             
-            if comment.text.containsString(searchTerm) {
-                commentsMatch = true
-                return commentsMatch
+            if comment.matchesSearchTerm(searchTerm) {
+                result = true
+                break
             }
         }
         
-        return commentsMatch
+        return result
     }
 }
