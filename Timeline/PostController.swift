@@ -35,6 +35,13 @@ class PostController {
         saveContext()
     }
     
+    func deletePost(post: Post) {
+        
+        moc.deleteObject(post)
+        
+        saveContext()
+    }
+    
     func addCommentToPost(text: String, post: Post) {
         
         _ = Comment(text: text, post: post)
@@ -42,9 +49,9 @@ class PostController {
         saveContext()
     }
     
-    func deletePost(post: Post) {
+    func deleteComment(comment: Comment) {
         
-        moc.deleteObject(post)
+        moc.deleteObject(comment)
         
         saveContext()
     }

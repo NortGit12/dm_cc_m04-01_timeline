@@ -27,6 +27,6 @@ class Comment: SyncableObject {
         self.text = text
         self.post = post
         self.timestamp = timestamp
-        self.recordName = "Comment"
+        self.recordName = NSUUID().UUIDString
     }
 }

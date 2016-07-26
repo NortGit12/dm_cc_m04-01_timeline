@@ -71,6 +71,17 @@ class PostDetailTableViewController: UITableViewController {
         
         postImageView.image = UIImage(data: post.photoData)
     }
+    
+    func refreshDataAndView() {
+        
+        do {
+            try self.fetchedResultsController?.performFetch()
+        } catch let error as NSError {
+            print("Error fetching comments: \(error)")
+        }
+        
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
@@ -97,6 +108,17 @@ class PostDetailTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        refreshDataAndView()
+        
+        guard let comment = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Comment else { return }
+        
+        PostController.sharedController.deleteComment(comment)
+        
+        refreshDataAndView()
+    }
+    
     // MARK: - Action(s)
     
     @IBAction func commentButtonTapped(sender: UIButton) {
@@ -116,13 +138,7 @@ class PostDetailTableViewController: UITableViewController {
             
             PostController.sharedController.addCommentToPost(text, post: post)
             
-            do {
-                try self.fetchedResultsController?.performFetch()
-            } catch {
-                print("Error: Latest comments could not be fetched")
-            }
-            
-            self.tableView.reloadData()
+            self.refreshDataAndView()
         }
         
         commentAlertController.addAction(cancelAction)

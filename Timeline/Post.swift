@@ -26,7 +26,7 @@ class Post: SyncableObject {
         
         self.photoData = photoData
         self.timestamp = timestamp
-        self.recordName = "Post"
+        self.recordName = NSUUID().UUIDString
     }
 
 }
