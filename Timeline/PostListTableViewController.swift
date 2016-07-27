@@ -42,6 +42,19 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController?.delegate = self
         
+//        do {
+//            try fetchedResultsController?.performFetch()
+//        } catch let error as NSError {
+//            let errorMessage = "Error fetching posts.  \(error)"
+//            print("\(errorMessage)")
+//            NSLog(errorMessage)
+//        }
+        
+        refreshFetchedResults()
+    }
+    
+    func refreshFetchedResults() {
+        
         do {
             try fetchedResultsController?.performFetch()
         } catch let error as NSError {
@@ -77,6 +90,8 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        refreshFetchedResults()
         
         guard let searchTermLowercase = searchController.searchBar.text?.lowercaseString
             , searchResultsController = searchController.searchResultsController as? SearchResultsTableViewController

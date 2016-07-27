@@ -34,6 +34,6 @@ class Comment: SyncableObject, SearchableRecord {
     // MARK: - SearchableRecord
     func matchesSearchTerm(searchTerm: String) -> Bool {
         
-        return text.containsString(searchTerm)
+        return text.lowercaseString.containsString(searchTerm)
     }
 }
