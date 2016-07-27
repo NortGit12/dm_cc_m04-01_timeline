@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+class PostListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     // MARK: - Stored Properties
     
@@ -41,14 +41,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PostController.sharedController.moc, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController?.delegate = self
-        
-//        do {
-//            try fetchedResultsController?.performFetch()
-//        } catch let error as NSError {
-//            let errorMessage = "Error fetching posts.  \(error)"
-//            print("\(errorMessage)")
-//            NSLog(errorMessage)
-//        }
         
         refreshFetchedResults()
     }
@@ -83,6 +75,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         searchController?.searchResultsUpdater = self
         searchController?.hidesNavigationBarDuringPresentation = true
         searchController?.searchBar.placeholder = "Search comments..."
+        searchController?.searchBar.delegate = self
         searchController?.definesPresentationContext = true
         tableView.tableHeaderView = searchController?.searchBar
         
@@ -172,7 +165,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.endUpdates()
     }
-
+    
     
     // MARK: - Navigation
 
@@ -213,7 +206,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                 searchController?.searchBar.text = ""
                 searchController?.searchBar.resignFirstResponder()
                 
-                searchResultsController.dismissViewControllerAnimated(false, completion: nil)
+                searchResultsController.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
