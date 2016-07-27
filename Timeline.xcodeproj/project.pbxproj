@@ -10,6 +10,7 @@
 		1F12092E1D47F2DD00795D02 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */; };
 		1F1209311D4807A100795D02 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */; };
 		1F1619D61D49514700A99E5D /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1619D51D49514700A99E5D /* CloudKitManager.swift */; };
+		1F1619D91D495A0200A99E5D /* CloudKitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */; };
 		1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B911D46A1AB0011873D /* PostListTableViewController.swift */; };
 		1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */; };
 		1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */; };
@@ -53,6 +54,7 @@
 		1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		1F1619D51D49514700A99E5D /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManagedObject.swift; sourceTree = "<group>"; };
 		1F724B911D46A1AB0011873D /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */,
 				1F724BA51D46A6580011873D /* Comment.swift */,
 				1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */,
+				1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */,
 			);
 			name = "Model+CoreData";
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				1F724B9E1D46A4CB0011873D /* Model.xcdatamodeld in Sources */,
 				1F1619D61D49514700A99E5D /* CloudKitManager.swift in Sources */,
 				68658B281CF8A1D60016C5CD /* AppDelegate.swift in Sources */,
+				1F1619D91D495A0200A99E5D /* CloudKitManagedObject.swift in Sources */,
 				1F724BA61D46A6580011873D /* SyncableObject+CoreDataProperties.swift in Sources */,
 				1F12092E1D47F2DD00795D02 /* SearchableRecord.swift in Sources */,
 				1F724BAB1D46A6580011873D /* Comment.swift in Sources */,
