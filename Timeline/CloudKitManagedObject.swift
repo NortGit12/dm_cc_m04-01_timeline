@@ -31,8 +31,6 @@ extension CloudKitManagedObject {
     
     var isSynced: Bool { return recordIDData != nil }
     
-//    var cloudKitRecordID: CKRecordID? {  }
-    
     var nameForManagedObject: String { return NSUUID().UUIDString }
     
     var cloudKitRecordID: CKRecordID? {
