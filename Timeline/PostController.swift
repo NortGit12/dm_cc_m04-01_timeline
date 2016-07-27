@@ -15,6 +15,7 @@ class PostController {
     
     static let sharedController = PostController()
     let moc = Stack.sharedStack.managedObjectContext
+    let cloudKitManager = CloudKitManager()
     
     // MARK: - Initialier(s)
     
@@ -28,12 +29,29 @@ class PostController {
     func createPost(image: UIImage, caption: String) {
         
         guard let image = UIImageJPEGRepresentation(image, 0.75)
-            , post = Post(photoData: image)
+//            , post = Post(photoData: image)
         else { return }
         
-        _ = Comment(text: caption, post: post)
-        
-        saveContext()
+        if var post = Post(photoData: image) {
+            
+            _ = Comment(text: caption, post: post)
+            
+            saveContext()
+            
+            guard let postCloudKitRecord = post.cloudKitRecord else { return }
+            
+            cloudKitManager.saveRecord(postCloudKitRecord) { (record, error) in
+                
+                if error != nil {
+                    print("Error saving the Post to CloudKit: \(error)")
+                }
+                
+                if let record = record {
+                    
+                    post.update(record)
+                }
+            }
+        }
     }
     
     func deletePost(post: Post) {
@@ -45,9 +63,23 @@ class PostController {
     
     func addCommentToPost(text: String, post: Post) {
         
-        _ = Comment(text: text, post: post)
+        var comment = Comment(text: text, post: post)
         
         saveContext()
+        
+        guard let commentCloudKitRecord = comment?.cloudKitRecord else { return }
+        
+        cloudKitManager.saveRecord(commentCloudKitRecord) { (record, error) in
+            
+            if error != nil {
+                print("Error saving comment to post: \(error)")
+            }
+            
+            if let record = record {
+                
+                comment?.update(record)
+            }
+        }
     }
     
     func deleteComment(comment: Comment) {

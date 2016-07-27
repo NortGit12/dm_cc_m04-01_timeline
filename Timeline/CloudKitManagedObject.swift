@@ -51,7 +51,8 @@ extension CloudKitManagedObject {
     
     func updateWithRecord(record: CKRecord) {
         
-        
+        // TODO: Implement this method
+        print("\nImplement \"updateWithRecord(_:)\"\n")
     }
     
     mutating func update(record: CKRecord) {
