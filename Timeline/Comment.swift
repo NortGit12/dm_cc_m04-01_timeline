@@ -11,6 +11,11 @@ import CoreData
 
 
 class Comment: SyncableObject, SearchableRecord {
+    
+    var descriptionString: String {
+        
+        return "\ttext = \(text)\ttimestamp = \(timestamp)\trecordName = \(recordName)"
+    }
 
     // MARK: - Initializers
     

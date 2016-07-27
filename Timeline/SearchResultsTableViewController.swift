@@ -14,6 +14,8 @@ class SearchResultsTableViewController: UITableViewController {
     
     @IBOutlet weak var postImageView: UIImageView!
     
+    var sourceTableViewController: UITableViewController?
+    
     var resultsArray: [SearchableRecord]?
 
     // MARK: - General
@@ -47,7 +49,9 @@ class SearchResultsTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
         
-        presentingViewController?.performSegueWithIdentifier("searchResultsToDetailSegue", sender: cell)
+        
+        
+        sourceTableViewController?.performSegueWithIdentifier("searchResultToDetailSegue", sender: cell)
     }
 
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F12092E1D47F2DD00795D02 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */; };
+		1F1209311D4807A100795D02 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */; };
 		1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B911D46A1AB0011873D /* PostListTableViewController.swift */; };
 		1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */; };
 		1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		1F12092D1D47F2DD00795D02 /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
+		1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		1F724B911D46A1AB0011873D /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */,
 				1F724B981D46A1DD0011873D /* AddPostTableViewController.swift */,
 				1F724B9A1D46A4750011873D /* CustomTableViewCell.swift */,
+				1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				1F724BA71D46A6580011873D /* SyncableObject.swift in Sources */,
 				1F724BAA1D46A6580011873D /* Comment+CoreDataProperties.swift in Sources */,
 				1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */,
+				1F1209311D4807A100795D02 /* PhotoSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,8 @@ class PostDetailTableViewController: UITableViewController {
     @IBOutlet weak var postImageView: UIImageView!
     
     var post: Post?
+    
+    var comments: [Comment]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,11 @@ class PostDetailTableViewController: UITableViewController {
         initializeFetchedResultsController()
 
         if let post = post {
+            
+            guard let comments = fetchedResultsController?.fetchedObjects as? [Comment] else { return }
+            
+            print("\nPost's comments")
+            comments.map{ print($0.descriptionString) }
             
             updateWithPost(post)
             tableView.reloadData()
@@ -149,7 +156,16 @@ class PostDetailTableViewController: UITableViewController {
     
     @IBAction func shareButtonTapped(sender: UIButton) {
         
+        guard let imageData = post?.photoData
+            , image = UIImage(data: imageData)
+            , firstComment = post?.comments?.firstObject as? Comment
+        else { return }
         
+        let captionText = firstComment.text
+        
+        let activityShareController = UIActivityViewController(activityItems: [image, captionText], applicationActivities: nil)
+        
+        presentViewController(activityShareController, animated: true, completion: nil)
     }
     
     @IBAction func followButtonTapped(sender: UIButton) {

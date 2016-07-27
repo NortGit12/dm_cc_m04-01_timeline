@@ -63,12 +63,17 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let resultsController = storyboard.instantiateViewControllerWithIdentifier("resultsTableViewController")
         
+        guard let resultsTableViewController = resultsController as? SearchResultsTableViewController else { return }
+        resultsTableViewController.sourceTableViewController = self
+        
         searchController = UISearchController(searchResultsController: resultsController)
         searchController?.searchResultsUpdater = self
         searchController?.hidesNavigationBarDuringPresentation = true
         searchController?.searchBar.placeholder = "Search comments..."
         searchController?.definesPresentationContext = true
         tableView.tableHeaderView = searchController?.searchBar
+        
+        
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -174,7 +179,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                     postDetailTableviewController.post = post
                 }
             }
-        } else if segue.identifier == "searchResultsToDetailSegue" {
+        } else if segue.identifier == "searchResultToDetailSegue" {
             
             // Where am I going?
             if let postDetailViewController = segue.destinationViewController as? PostDetailTableViewController {
@@ -189,6 +194,11 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
                 
                 // Am I finished packing
                 postDetailViewController.post = post
+                
+                searchController?.searchBar.text = ""
+                searchController?.searchBar.resignFirstResponder()
+                
+                searchResultsController.dismissViewControllerAnimated(false, completion: nil)
             }
         }
     }
