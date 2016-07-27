@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PostController {
     
@@ -65,6 +66,23 @@ class PostController {
             print("\(errorMessge)")
             NSLog(errorMessge)
         }
+    }
+    
+    func postWithName(name: String) -> Post? {
+        
+        let request = NSFetchRequest(entityName: "Post")
+        let predicate = NSPredicate(format: "post.recordName == %@", argumentArray: [name])
+        request.predicate = predicate
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error: No post found with the name \"\(name)\".  \(error)")
+        }
+        
+        return fetchedResultsController.fetchedObjects?.first as? Post ?? nil
     }
     
     func generateMockData() {

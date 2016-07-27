@@ -15,10 +15,10 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     // MARK: - Stored Properties
     
+    static var recordType: String { return "Post" }
+    
     static let photoKey = "photo"
     static let timestampKey = "timestamp"
-    
-    var recordType: String { return "Post" }
     
     lazy var temporaryPhotoURL: NSURL = {
         
@@ -35,7 +35,7 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     var cloudKitRecord: CKRecord? {
         
-        let record = CKRecord(recordType: recordType)
+        let record = CKRecord(recordType: Post.recordType)
         record[Post.photoKey] = CKAsset(fileURL: temporaryPhotoURL)
         record[Post.timestampKey]  = timestamp
         
@@ -46,7 +46,7 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
 
     convenience init?(photoData: NSData, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
-        guard let postEntity = NSEntityDescription.entityForName("Post", inManagedObjectContext: context) else { return nil }
+        guard let postEntity = NSEntityDescription.entityForName(Post.recordType, inManagedObjectContext: context) else { return nil }
         
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         
@@ -61,13 +61,13 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
             , timestamp = record[Post.timestampKey] as? NSDate
         else { return nil }
         
-        guard let postEntity = NSEntityDescription.entityForName("Post", inManagedObjectContext: context) else { return nil }
+        guard let postEntity = NSEntityDescription.entityForName(Post.recordType, inManagedObjectContext: context) else { return nil }
         
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         
         self.photoData = photoData
         self.timestamp = timestamp
-        self.recordName = NSUUID().UUIDString
+        self.recordName = record.recordID.recordName
         self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
     }
     
