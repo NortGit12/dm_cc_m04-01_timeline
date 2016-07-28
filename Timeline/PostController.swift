@@ -22,6 +22,8 @@ class PostController {
     init() {
         
 //        generateMockData()
+        
+        performFullSync()
     }
     
     // MARK: - Method(s)
@@ -225,6 +227,20 @@ class PostController {
                 
                 let success = records != nil
                 completion(success: success, error: error)
+            }
+        }
+    }
+    
+    func performFullSync(completion: (() -> Void)? = nil) {
+        
+        pushChangestoCloudKit{ (success, error) in
+
+            if success == true {
+                
+                self.fetchNewRecords(Post.recordTypeKey) {
+                    
+                    self.fetchNewRecords(Comment.recordTypeKey)
+                }
             }
         }
     }
