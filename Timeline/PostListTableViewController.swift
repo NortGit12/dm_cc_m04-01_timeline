@@ -15,24 +15,57 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     var fetchedResultsController: NSFetchedResultsController?
     var searchController: UISearchController?
+    weak var activityIndicatorView: UIActivityIndicatorView!
     
     // MARK: - General
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initializeFetchedResultsController()
-        
         setUpSearchController()
+        
+        self.refreshControl?.addTarget(self, action: #selector(PostListTableViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        tableView.backgroundView = activityIndicatorView
+        
+        self.activityIndicatorView = activityIndicatorView
+        
+//        requestFullSync()
+        
+        initializeFetchedResultsController()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
+//        requestFullSync()
     }
     
     // MARK: - Method(s)
+    
+    func requestFullSync(completion: (() -> Void)? = nil) {
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        PostController.sharedController.performFullSync {
+            
+            self.tableView.reloadData()
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            
+            if let completion = completion {
+                
+                completion()
+            }
+        }
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        
+//        requestFullSync {
+//            refreshControl.endRefreshing()
+//        }
+    }
     
     func initializeFetchedResultsController() {
         
@@ -107,11 +140,12 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as? CustomTableViewCell
-            , post = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Post
-        else { return UITableViewCell() }
-
-        cell.updateWithPost(post)
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        
+        if let post = fetchedResultsController?.fetchedObjects?[indexPath.row] as? Post {
+            
+            cell.updateWithPost(post)
+        }
 
         return cell
     }
@@ -142,8 +176,10 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         case .Delete:
             tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Move: break
-        case .Update: break
+        case .Move:
+            break
+        case .Update:
+            break
         }
     }
     
@@ -151,14 +187,18 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            guard let indexPath = indexPath, newIndexPath = newIndexPath else { return }
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         case .Update:
-            configureCell(self.tableView.cellForRowAtIndexPath(indexPath!)!, indexPath: indexPath!)
+            guard let indexPath = indexPath, tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) else { return }
+            configureCell(tableViewCell, indexPath: indexPath)
         }
     }
     

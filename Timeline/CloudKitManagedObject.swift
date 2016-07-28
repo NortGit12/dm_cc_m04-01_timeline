@@ -33,8 +33,6 @@ extension CloudKitManagedObject {
     
     var isSynced: Bool { return recordIDData != nil }
     
-    var nameForManagedObject: String { return NSUUID().UUIDString }
-    
     var cloudKitRecordID: CKRecordID? {
         
         guard let recordIDData = recordIDData else { return nil }
@@ -50,6 +48,11 @@ extension CloudKitManagedObject {
     }
     
     // MARK: - Method(s)
+    
+    func nameForManagedObject() -> String {
+        
+        return NSUUID().UUIDString
+    }
     
     func update(record: CKRecord) {
         

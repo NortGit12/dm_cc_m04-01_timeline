@@ -16,41 +16,46 @@ class PostController {
     static let sharedController = PostController()
     let moc = Stack.sharedStack.managedObjectContext
     let cloudKitManager = CloudKitManager()
+    var isSyncing: Bool = false
     
     // MARK: - Initialier(s)
     
     init() {
         
-//        generateMockData()
+        generateMockData()
         
-        performFullSync()
+//        performFullSync()
     }
     
     // MARK: - Method(s)
     
-    func createPost(image: UIImage, caption: String) {
+    func createPost(image: UIImage, caption: String, completion: (() -> Void)? = nil) {
         
-        guard let image = UIImageJPEGRepresentation(image, 0.75)
-//            , post = Post(photoData: image)
-        else { return }
+        guard let image = UIImageJPEGRepresentation(image, 0.75) else { return }
         
         let post = Post(photoData: image)
         
-        _ = Comment(text: caption, post: post)
+        addCommentToPost(caption, post: post)
         
         saveContext()
         
-        guard let postCloudKitRecord = post.cloudKitRecord else { return }
+        if let completion = completion {
+            
+            completion()
+        }
         
-        cloudKitManager.saveRecord(postCloudKitRecord) { (record, error) in
+        if let postCloudKitRecord = post.cloudKitRecord {
             
-            if error != nil {
-                print("Error saving the Post to CloudKit: \(error)")
-            }
-            
-            if let record = record {
+            cloudKitManager.saveRecord(postCloudKitRecord) { (record, error) in
                 
-                post.update(record)
+                if error != nil {
+                    print("Error saving the Post and/or it's Comment to CloudKit: \(error)")
+                }
+                
+                if let record = record {
+                    
+                    post.update(record)
+                }
             }
         }
     }
@@ -62,23 +67,29 @@ class PostController {
         saveContext()
     }
     
-    func addCommentToPost(text: String, post: Post) {
+    func addCommentToPost(text: String, post: Post, completion: ((success: Bool) -> Void)? = nil) {
         
         let comment = Comment(text: text, post: post)
         
         saveContext()
         
-        guard let commentCloudKitRecord = comment?.cloudKitRecord else { return }
+        if let completion = completion {
+            
+            completion(success: true)
+        }
         
-        cloudKitManager.saveRecord(commentCloudKitRecord) { (record, error) in
+        if let commentCloudKitRecord = comment.cloudKitRecord {
             
-            if error != nil {
-                print("Error saving comment to post: \(error)")
-            }
-            
-            if let record = record {
+            cloudKitManager.saveRecord(commentCloudKitRecord) { (record, error) in
                 
-                comment?.update(record)
+                if error != nil {
+                    print("Error saving comment to post: \(error)")
+                }
+                
+                if let record = record {
+                    
+                    comment.update(record)
+                }
             }
         }
     }
@@ -140,37 +151,9 @@ class PostController {
         return syncedRecords ?? []
     }
     
-    func pushChangesToCloudKit(completion: ((success: Bool, error: NSError?) -> Void)?) {
-        
-        let unsyncedObjectsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
-        let unsyncedRecordsArray = unsyncedObjectsArray.flatMap{ $0.cloudKitRecord }
-        
-        cloudKitManager.saveRecords(unsyncedRecordsArray, perRecordCompletion: { (record, error) in
-            
-            if error != nil {
-                print("Error saving unsynced records: \(error)")
-            }
-            
-            guard let record = record else { return }
-            
-            if let matchingRecord = unsyncedObjectsArray.filter({ $0.recordName == record.recordID.recordName }).first {
-                
-                matchingRecord.update(record)
-            }
-            
-        }) { (records, error) in
-            
-            if let completion = completion {
-                
-                let success = records != nil
-                completion(success: success, error: error)
-            }
-        }
-    }
-    
     func fetchNewRecords(type: String, completion: (() -> Void)? = nil) {
         
-        let referencesToExclude = syncedRecords(Post.recordTypeKey).flatMap{ $0.cloudKitReference }
+        let referencesToExclude = syncedRecords(Post.typeKey).flatMap{ $0.cloudKitReference }
         
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         
@@ -182,8 +165,10 @@ class PostController {
         cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: { (record) in
             
             switch type {
-            case Post.recordTypeKey: _ = Post(record: record)
-            case Comment.recordTypeKey: _ = Comment(record: record)
+            case Post.typeKey:
+                let _ = Post(record: record)
+            case Comment.typeKey:
+                let _ = Comment(record: record)
             default: return
             }
             
@@ -205,7 +190,7 @@ class PostController {
     
     func pushChangestoCloudKit(completion: ((success: Bool, error: NSError?) -> Void)? = nil) {
         
-        let unsyncedObjectsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
+        let unsyncedObjectsArray = unsyncedRecords(Post.typeKey) + unsyncedRecords(Comment.typeKey)
         let unsyncedRecordsArray = unsyncedObjectsArray.flatMap{ $0.cloudKitRecord }
         
         cloudKitManager.saveRecords(unsyncedRecordsArray, perRecordCompletion: { (record, error) in
@@ -233,22 +218,38 @@ class PostController {
     
     func performFullSync(completion: (() -> Void)? = nil) {
         
-        pushChangestoCloudKit{ (success, error) in
-
-            if success == true {
+        if isSyncing == true {
+            
+            if let completion = completion {
                 
-                self.fetchNewRecords(Post.recordTypeKey) {
-                    
-                    self.fetchNewRecords(Comment.recordTypeKey)
-                }
+                completion()
             }
+        } else {
+            
+            isSyncing = true
+            
+//            pushChangestoCloudKit{ (_, _) in
+            
+                self.fetchNewRecords(Post.typeKey) {
+                    
+                    self.fetchNewRecords(Comment.typeKey) {
+                        
+                        self.isSyncing = false
+                        
+                        if let completion = completion {
+                            
+                            completion()
+                        }
+                    }
+                }
+//            }
         }
     }
     
     func generateMockData() {
         
-        createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")
-        createPost(UIImage(named: "leopard")!, caption: "Cool leopard")
+//        createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")
+//        createPost(UIImage(named: "leopard")!, caption: "Cool leopard")
         createPost(UIImage(named: "tiger")!, caption: "Cool tiger")
     }
 }

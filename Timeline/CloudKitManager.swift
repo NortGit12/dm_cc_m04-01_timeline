@@ -132,6 +132,8 @@ class CloudKitManager {
                 }
             }
         }
+        
+        self.publicDatabase.addOperation(queryOperation)
     }
     
     func fetchCurrentUserRecords(type: String, completion: ((records: [CKRecord]?, error: NSError?) -> Void)?) {

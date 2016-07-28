@@ -11,6 +11,7 @@
 		1F1209311D4807A100795D02 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */; };
 		1F1619D61D49514700A99E5D /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1619D51D49514700A99E5D /* CloudKitManager.swift */; };
 		1F1619D91D495A0200A99E5D /* CloudKitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */; };
+		1F3F320F1D4A61850088CDBC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3F320E1D4A61850088CDBC /* CloudKit.framework */; };
 		1F724B921D46A1AB0011873D /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B911D46A1AB0011873D /* PostListTableViewController.swift */; };
 		1F724B951D46A1C10011873D /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */; };
 		1F724B971D46A1CF0011873D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */; };
@@ -55,6 +56,8 @@
 		1F1209301D4807A100795D02 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		1F1619D51D49514700A99E5D /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManagedObject.swift; sourceTree = "<group>"; };
+		1F3F320B1D4A5CDD0088CDBC /* Timeline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Timeline.entitlements; sourceTree = "<group>"; };
+		1F3F320E1D4A61850088CDBC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1F724B911D46A1AB0011873D /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		1F724B941D46A1C10011873D /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		1F724B961D46A1CF0011873D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3F320F1D4A61850088CDBC /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +167,7 @@
 		68658B1B1CF8A1D60016C5CD = {
 			isa = PBXGroup;
 			children = (
+				1F3F320E1D4A61850088CDBC /* CloudKit.framework */,
 				68658B261CF8A1D60016C5CD /* Timeline */,
 				68658B3B1CF8A1D60016C5CD /* TimelineTests */,
 				68658B461CF8A1D60016C5CD /* TimelineUITests */,
@@ -183,6 +188,7 @@
 		68658B261CF8A1D60016C5CD /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				1F3F320B1D4A5CDD0088CDBC /* Timeline.entitlements */,
 				68658B271CF8A1D60016C5CD /* AppDelegate.swift */,
 				1F724BAC1D46A75A0011873D /* Stack.swift */,
 				1F724B9F1D46A4D30011873D /* Model+CoreData */,
@@ -284,6 +290,15 @@
 				TargetAttributes = {
 					68658B231CF8A1D60016C5CD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = A6ASF988U5;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					68658B371CF8A1D60016C5CD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -509,9 +524,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Timeline/Timeline.entitlements;
 				INFOPLIST_FILE = Timeline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.devmountain.Timeline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jcn.Timeline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -520,9 +536,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Timeline/Timeline.entitlements;
 				INFOPLIST_FILE = Timeline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.devmountain.Timeline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jcn.Timeline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
