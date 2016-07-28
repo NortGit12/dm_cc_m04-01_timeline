@@ -32,24 +32,23 @@ class PostController {
 //            , post = Post(photoData: image)
         else { return }
         
-        if var post = Post(photoData: image) {
+        let post = Post(photoData: image)
+        
+        _ = Comment(text: caption, post: post)
+        
+        saveContext()
+        
+        guard let postCloudKitRecord = post.cloudKitRecord else { return }
+        
+        cloudKitManager.saveRecord(postCloudKitRecord) { (record, error) in
             
-            _ = Comment(text: caption, post: post)
+            if error != nil {
+                print("Error saving the Post to CloudKit: \(error)")
+            }
             
-            saveContext()
-            
-            guard let postCloudKitRecord = post.cloudKitRecord else { return }
-            
-            cloudKitManager.saveRecord(postCloudKitRecord) { (record, error) in
+            if let record = record {
                 
-                if error != nil {
-                    print("Error saving the Post to CloudKit: \(error)")
-                }
-                
-                if let record = record {
-                    
-                    post.update(record)
-                }
+                post.update(record)
             }
         }
     }
@@ -63,7 +62,7 @@ class PostController {
     
     func addCommentToPost(text: String, post: Post) {
         
-        var comment = Comment(text: text, post: post)
+        let comment = Comment(text: text, post: post)
         
         saveContext()
         
