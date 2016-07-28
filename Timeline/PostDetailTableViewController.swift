@@ -31,10 +31,10 @@ class PostDetailTableViewController: UITableViewController {
 
         if let post = post {
             
-            guard let comments = fetchedResultsController?.fetchedObjects as? [Comment] else { return }
+//            guard let comments = fetchedResultsController?.fetchedObjects as? [Comment] else { return }
             
-            print("\nPost's comments")
-            comments.map{ print($0.descriptionString) }
+//            print("\nPost's comments")
+//            comments.map{ print($0.descriptionString) }
             
             updateWithPost(post)
             tableView.reloadData()

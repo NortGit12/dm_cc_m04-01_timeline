@@ -140,10 +140,10 @@ class PostController {
     
     func pushChangesToCloudKit(completion: ((success: Bool, error: NSError?) -> Void)?) {
         
-        let unsyncedRecordsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
-        let unsavedRecords = unsyncedRecordsArray.flatMap{ $0.cloudKitRecord }
+        let unsyncedObjectsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
+        let unsyncedRecordsArray = unsyncedObjectsArray.flatMap{ $0.cloudKitRecord }
         
-        cloudKitManager.saveRecords(unsavedRecords, perRecordCompletion: { (record, error) in
+        cloudKitManager.saveRecords(unsyncedRecordsArray, perRecordCompletion: { (record, error) in
             
             if error != nil {
                 print("Error saving unsynced records: \(error)")
@@ -151,7 +151,7 @@ class PostController {
             
             guard let record = record else { return }
             
-            if let matchingRecord = unsyncedRecordsArray.filter({ $0.recordName == record.recordID.recordName }).first {
+            if let matchingRecord = unsyncedObjectsArray.filter({ $0.recordName == record.recordID.recordName }).first {
                 
                 matchingRecord.update(record)
             }
@@ -199,6 +199,34 @@ class PostController {
             }
         }
         
+    }
+    
+    func pushChangestoCloudKit(completion: ((success: Bool, error: NSError?) -> Void)? = nil) {
+        
+        let unsyncedObjectsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
+        let unsyncedRecordsArray = unsyncedObjectsArray.flatMap{ $0.cloudKitRecord }
+        
+        cloudKitManager.saveRecords(unsyncedRecordsArray, perRecordCompletion: { (record, error) in
+            
+            if error != nil {
+                print("Error saving unsynced records: \(error)")
+            }
+            
+            guard let record = record else { return }
+            
+            if let matchingRecord = unsyncedObjectsArray.filter({ $0.recordName == record.recordID.recordName }).first {
+                
+                matchingRecord.update(record)
+            }
+            
+        }) { (records, error) in
+            
+            if let completion = completion {
+                
+                let success = records != nil
+                completion(success: success, error: error)
+            }
+        }
     }
     
     func generateMockData() {
