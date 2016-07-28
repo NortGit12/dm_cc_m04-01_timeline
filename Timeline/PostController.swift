@@ -138,6 +138,69 @@ class PostController {
         return syncedRecords ?? []
     }
     
+    func pushChangesToCloudKit(completion: ((success: Bool, error: NSError?) -> Void)?) {
+        
+        let unsyncedRecordsArray = unsyncedRecords(Post.recordTypeKey) + unsyncedRecords(Comment.recordTypeKey)
+        let unsavedRecords = unsyncedRecordsArray.flatMap{ $0.cloudKitRecord }
+        
+        cloudKitManager.saveRecords(unsavedRecords, perRecordCompletion: { (record, error) in
+            
+            if error != nil {
+                print("Error saving unsynced records: \(error)")
+            }
+            
+            guard let record = record else { return }
+            
+            if let matchingRecord = unsyncedRecordsArray.filter({ $0.recordName == record.recordID.recordName }).first {
+                
+                matchingRecord.update(record)
+            }
+            
+        }) { (records, error) in
+            
+            if let completion = completion {
+                
+                let success = records != nil
+                completion(success: success, error: error)
+            }
+        }
+    }
+    
+    func fetchNewRecords(type: String, completion: (() -> Void)? = nil) {
+        
+        let referencesToExclude = syncedRecords(Post.recordTypeKey).flatMap{ $0.cloudKitReference }
+        
+        var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
+        
+        if referencesToExclude.isEmpty {
+            
+            predicate = NSPredicate(value: true)
+        }
+        
+        cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: { (record) in
+            
+            switch type {
+            case Post.recordTypeKey: _ = Post(record: record)
+            case Comment.recordTypeKey: _ = Comment(record: record)
+            default: return
+            }
+            
+            self.saveContext()
+            
+        }) { (records, error) in
+            
+            if error != nil {
+                print("Error fetching records: \(error)")
+            }
+            
+            if let completion = completion {
+                
+                completion()
+            }
+        }
+        
+    }
+    
     func generateMockData() {
         
         createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")

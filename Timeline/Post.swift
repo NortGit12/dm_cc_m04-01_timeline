@@ -60,7 +60,7 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.recordName = NSUUID().UUIDString
     }
     
-    convenience required init?(record: CKRecord, context: NSManagedObjectContext) {
+    convenience required init?(record: CKRecord, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let photoData = record[Post.photoKey] as? NSData
             , timestamp = record[Post.timestampKey] as? NSDate
@@ -74,14 +74,6 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.timestamp = timestamp
         self.recordName = record.recordID.recordName
         self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
-    }
-    
-    // MARK: - Method(s)
-    
-    func updateWithRecord(record: CKRecord) {
-        
-        // TODO: Implement this method
-        print("\nPost: Implement \"updateWithRecord(_:)\"\n")
     }
     
     // MARK: - SearchableRecord

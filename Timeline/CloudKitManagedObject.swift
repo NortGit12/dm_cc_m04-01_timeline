@@ -25,10 +25,6 @@ protocol CloudKitManagedObject {
     
     init?(record: CKRecord, context: NSManagedObjectContext)
     
-    // MARK: - Method(s)
-    
-    func updateWithRecord(record: CKRecord)
-    
 }
 
 extension CloudKitManagedObject {
@@ -54,12 +50,6 @@ extension CloudKitManagedObject {
     }
     
     // MARK: - Method(s)
-    
-//    func updateWithRecord(record: CKRecord) {
-//        
-//        // TODO: Implement this method
-//        print("\nImplement \"updateWithRecord(_:)\"\n")
-//    }
     
     func update(record: CKRecord) {
         

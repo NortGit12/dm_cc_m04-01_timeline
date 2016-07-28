@@ -55,7 +55,7 @@ class Comment: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.recordName = NSUUID().UUIDString
     }
     
-    convenience required init?(record: CKRecord, context: NSManagedObjectContext) {
+    convenience required init?(record: CKRecord, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
         guard let text = record[Comment.textKey] as? String
             , timestamp = record[Comment.timestampKey] as? NSDate
@@ -72,14 +72,6 @@ class Comment: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.post = post
         self.recordName = record.recordID.recordName
         self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
-    }
-    
-    // MARK: - Method(s)
-    
-    func updateWithRecord(record: CKRecord) {
-        
-        // TODO: Implement this method
-        print("\nComment: Implement \"updateWithRecord(_:)\"\n")
     }
     
     // MARK: - SearchableRecord
