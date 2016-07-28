@@ -10,15 +10,17 @@ import Foundation
 import CoreData
 import CloudKit
 
-
+@objc
 class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     // MARK: - Stored Properties
     
-    static var recordType: String { return "Post" }
+    static let recordTypeKey = "Post"
     
     static let photoKey = "photo"
     static let timestampKey = "timestamp"
+    
+    var recordType = Post.recordTypeKey
     
     lazy var temporaryPhotoURL: NSURL = {
         
@@ -35,7 +37,7 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     var cloudKitRecord: CKRecord? {
         
-        let record = CKRecord(recordType: Post.recordType)
+        let record = CKRecord(recordType: Post.recordTypeKey)
         record[Post.photoKey] = CKAsset(fileURL: temporaryPhotoURL)
         record[Post.timestampKey]  = timestamp
         
@@ -44,9 +46,12 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     // MARK: - Initializers
 
-    convenience init?(photoData: NSData, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+    convenience init(photoData: NSData, timestamp: NSDate = NSDate(), context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
-        guard let postEntity = NSEntityDescription.entityForName(Post.recordType, inManagedObjectContext: context) else { return nil }
+        guard let postEntity = NSEntityDescription.entityForName(Post.recordTypeKey, inManagedObjectContext: context) else {
+        
+            fatalError("Fatal Error: Could not initialize the Post")
+        }
         
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         
@@ -55,13 +60,13 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.recordName = NSUUID().UUIDString
     }
     
-    convenience init?(record: CKRecord, context: NSManagedObjectContext) {
+    convenience required init?(record: CKRecord, context: NSManagedObjectContext) {
         
         guard let photoData = record[Post.photoKey] as? NSData
             , timestamp = record[Post.timestampKey] as? NSDate
         else { return nil }
         
-        guard let postEntity = NSEntityDescription.entityForName(Post.recordType, inManagedObjectContext: context) else { return nil }
+        guard let postEntity = NSEntityDescription.entityForName(Post.recordTypeKey, inManagedObjectContext: context) else { return nil }
         
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         
@@ -69,6 +74,14 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.timestamp = timestamp
         self.recordName = record.recordID.recordName
         self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
+    }
+    
+    // MARK: - Method(s)
+    
+    func updateWithRecord(record: CKRecord) {
+        
+        // TODO: Implement this method
+        print("\nPost: Implement \"updateWithRecord(_:)\"\n")
     }
     
     // MARK: - SearchableRecord

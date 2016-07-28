@@ -117,6 +117,28 @@ class PostController {
         return fetchedResultsController.fetchedObjects?.first as? Post ?? nil
     }
     
+    func syncedRecords(type: String) -> [CloudKitManagedObject] {
+        
+        let request = NSFetchRequest(entityName: type)
+        let predicate = NSPredicate(format: "recordIDData != nil")
+        request.predicate = predicate
+        
+        let syncedRecords = (try? moc.executeFetchRequest(request)) as? [CloudKitManagedObject]
+        
+        return syncedRecords ?? []
+    }
+    
+    func unsyncedRecords(type: String) -> [CloudKitManagedObject] {
+        
+        let request = NSFetchRequest(entityName: type)
+        let predicate = NSPredicate(format: "recordIDData == nil")
+        request.predicate = predicate
+        
+        let syncedRecords = (try? moc.executeFetchRequest(request)) as? [CloudKitManagedObject]
+        
+        return syncedRecords ?? []
+    }
+    
     func generateMockData() {
         
         createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")

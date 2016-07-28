@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import CoreData
 import CloudKit
 
+@objc
 protocol CloudKitManagedObject {
     
     // MARK: - Stored Properties
@@ -18,6 +20,10 @@ protocol CloudKitManagedObject {
     var recordName: String { get set }
     var recordType: String { get }
     var cloudKitRecord: CKRecord? { get }
+    
+    // MARK: - Initializer(s)
+    
+    init?(record: CKRecord, context: NSManagedObjectContext)
     
     // MARK: - Method(s)
     
@@ -49,15 +55,21 @@ extension CloudKitManagedObject {
     
     // MARK: - Method(s)
     
-    func updateWithRecord(record: CKRecord) {
-        
-        // TODO: Implement this method
-        print("\nImplement \"updateWithRecord(_:)\"\n")
-    }
+//    func updateWithRecord(record: CKRecord) {
+//        
+//        // TODO: Implement this method
+//        print("\nImplement \"updateWithRecord(_:)\"\n")
+//    }
     
-    mutating func update(record: CKRecord) {
+    func update(record: CKRecord) {
         
-        recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
+        self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
+        
+        do {
+            try Stack.sharedStack.managedObjectContext.save()
+        } catch {
+            print("Unable to save Managed Object Context: \(error)")
+        }
     }
     
 }
