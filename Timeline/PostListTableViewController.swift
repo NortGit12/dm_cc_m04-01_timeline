@@ -31,7 +31,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         
         self.activityIndicatorView = activityIndicatorView
         
-//        requestFullSync()
+        requestFullSync()
         
         initializeFetchedResultsController()
     }

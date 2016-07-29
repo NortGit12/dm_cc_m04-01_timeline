@@ -125,6 +125,8 @@ class CloudKitManager {
                 let continuedQueryOperation = CKQueryOperation(cursor: queryCursor)
                 continuedQueryOperation.recordFetchedBlock = queryOperation.recordFetchedBlock
                 continuedQueryOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
+                
+                self.publicDatabase.addOperation(continuedQueryOperation)
             } else {
                 
                 if let completion = completion {

@@ -114,19 +114,25 @@ class PostController {
     
     func postWithName(name: String) -> Post? {
         
-        let request = NSFetchRequest(entityName: "Post")
-        let predicate = NSPredicate(format: "post.recordName == %@", argumentArray: [name])
+        if name.isEmpty { return nil }
+        
+        let request = NSFetchRequest(entityName: Post.typeKey)
+        let predicate = NSPredicate(format: "recordName == %@", argumentArray: [name])
         request.predicate = predicate
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+//        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        do {
+//            try fetchedResultsController.performFetch()
+//        } catch let error as NSError {
+//            print("Error: No post found with the name \"\(name)\".  \(error)")
+//        }
+//        
+//        return fetchedResultsController.fetchedObjects?.first as? Post ?? nil
         
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Error: No post found with the name \"\(name)\".  \(error)")
-        }
+        let result = (try? moc.executeFetchRequest(request) as? [Post]) ?? nil
         
-        return fetchedResultsController.fetchedObjects?.first as? Post ?? nil
+        return result?.first
     }
     
     func syncedRecords(type: String) -> [CloudKitManagedObject] {
@@ -166,11 +172,23 @@ class PostController {
             
             switch type {
             case Post.typeKey:
-                let _ = Post(record: record)
+                guard let post = Post(record: record) else {
+                    
+                    print("Could not create a Post from a Post record")
+                    return
+                }
+                print("post.recordName = \(post.recordName)")
             case Comment.typeKey:
-                let _ = Comment(record: record)
+                guard let comment = Comment(record: record) else {
+                    
+                    print("Could not create a Comment from a Comment record")
+                    return
+                }
+                print("comment.recordName = \(comment.recordName), comment.text = \(comment.text)")
             default: return
             }
+            
+            print("\nCreated a \(type): \(record)\n")
             
             self.saveContext()
             
@@ -250,6 +268,6 @@ class PostController {
         
 //        createPost(UIImage(named: "cheetah")!, caption: "Cool cheetah")
 //        createPost(UIImage(named: "leopard")!, caption: "Cool leopard")
-        createPost(UIImage(named: "tiger")!, caption: "Cool tiger")
+//        createPost(UIImage(named: "tiger")!, caption: "Cool tiger")
     }
 }

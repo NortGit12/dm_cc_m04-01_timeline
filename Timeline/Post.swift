@@ -63,11 +63,15 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
     
     convenience required init?(record: CKRecord, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
         
-        guard let photoData = record[Post.photoDataKey] as? NSData
-            , timestamp = record[Post.timestampKey] as? NSDate
+        guard let recordAssetData = record[Post.photoDataKey] as? CKAsset
+            , photoData = NSData(contentsOfURL: recordAssetData.fileURL)
+            , timestamp = record.creationDate
         else { return nil }
         
-        guard let postEntity = NSEntityDescription.entityForName(Post.typeKey, inManagedObjectContext: context) else { return nil }
+        guard let postEntity = NSEntityDescription.entityForName(Post.typeKey, inManagedObjectContext: context) else {
+            
+            fatalError("Error: Core Data failed to create entity from entity description.")
+        }
         
         self.init(entity: postEntity, insertIntoManagedObjectContext: context)
         

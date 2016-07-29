@@ -60,7 +60,9 @@ extension CloudKitManagedObject {
         
         do {
             try Stack.sharedStack.managedObjectContext.save()
+            
         } catch {
+            
             print("Unable to save Managed Object Context: \(error)")
         }
     }
