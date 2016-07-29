@@ -62,9 +62,9 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     
     func handleRefresh(refreshControl: UIRefreshControl) {
         
-//        requestFullSync {
-//            refreshControl.endRefreshing()
-//        }
+        requestFullSync {
+            refreshControl.endRefreshing()
+        }
     }
     
     func initializeFetchedResultsController() {

@@ -188,18 +188,18 @@ class PostController {
                         print("Could not create a Post from a Post record")
                         return
                     }
-                    print("post.recordName = \(post.recordName)")
+//                    print("post.recordName = \(post.recordName)")
                 case Comment.typeKey:
                     guard let comment = Comment(record: record) else {
                         
                         print("Could not create a Comment from a Comment record")
                         return
                     }
-                    print("comment.recordName = \(comment.recordName), comment.text = \(comment.text)")
+//                    print("comment.recordName = \(comment.recordName), comment.text = \(comment.text)")
                 default: return
                 }
                 
-                print("\nCreated a \(type): \(record)\n")
+//                print("\nCreated a \(type): \(record)\n")
                 
                 self.saveContext()
             }
@@ -215,7 +215,6 @@ class PostController {
                 completion()
             }
         }
-        
     }
     
     func pushChangestoCloudKit(completion: ((success: Bool, error: NSError?) -> Void)? = nil) {
@@ -266,7 +265,7 @@ class PostController {
             
             isSyncing = true
             
-            pushChangestoCloudKit{ (_, _) in
+            pushChangestoCloudKit { (_) in
             
                 self.fetchNewRecords(Post.typeKey) {
                     
