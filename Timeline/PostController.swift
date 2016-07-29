@@ -133,6 +133,19 @@ class PostController {
         return result?.first
     }
     
+    func commentWithName(name: String) -> Comment? {
+        
+        if name.isEmpty { return nil }
+        
+        let request = NSFetchRequest(entityName: Comment.typeKey)
+        let predicate = NSPredicate(format: "recordName == %@", argumentArray: [name])
+        request.predicate = predicate
+        
+        let result = (try? moc.executeFetchRequest(request) as? [Comment]) ?? nil
+        
+        return result?.first
+    }
+    
     func syncedManagedObjects(type: String) -> [CloudKitManagedObject] {
         
         let request = NSFetchRequest(entityName: type)
@@ -183,23 +196,35 @@ class PostController {
                 
                 switch type {
                 case Post.typeKey:
-                    guard let post = Post(record: record) else {
+                    
+                    guard let existingCoreDataPost = self.postWithName(record.recordID.recordName) else {
                         
-                        print("Could not create a Post from a Post record")
+                        guard let newCoreDataPost = Post(record: record) else {
+                            
+                            print("Could not create a Post from a Post record")
+                            return
+                        }
+                        
                         return
                     }
-//                    print("post.recordName = \(post.recordName)")
+                    
                 case Comment.typeKey:
-                    guard let comment = Comment(record: record) else {
+                    
+                    guard let existingCoreDataComment = self.commentWithName(record.recordID.recordName) else {
                         
-                        print("Could not create a Comment from a Comment record")
+                        guard let newCoreDataComment = Comment(record: record) else {
+                            
+                            print("Could not create a Comment from a Comment record")
+                            return
+                        }
+                        
                         return
                     }
-//                    print("comment.recordName = \(comment.recordName), comment.text = \(comment.text)")
+                    
                 default: return
                 }
                 
-//                print("\nCreated a \(type): \(record)\n")
+                
                 
                 self.saveContext()
             }

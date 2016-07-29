@@ -36,12 +36,6 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         initializeFetchedResultsController()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        requestFullSync()
-    }
-    
     // MARK: - Method(s)
     
     func requestFullSync(completion: (() -> Void)? = nil) {
@@ -61,6 +55,8 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
+        
+        initializeFetchedResultsController()
         
         requestFullSync {
             refreshControl.endRefreshing()
