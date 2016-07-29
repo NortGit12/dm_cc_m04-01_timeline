@@ -78,6 +78,12 @@ class Post: SyncableObject, SearchableRecord, CloudKitManagedObject {
         self.photoData = photoData
         self.timestamp = timestamp
         self.recordName = record.recordID.recordName
+        
+        /*
+         Core Data doesn't store CloudKit types, such as CKRecords and CKRecordIDs, so we use this to convert a CKRecordID into NSData
+         
+         Conforming to the NSCoding protocol means that a class knows how to turn itself into and out from raw binary data (NSData)
+        */
         self.recordIDData = NSKeyedArchiver.archivedDataWithRootObject(record.recordID)
     }
     
