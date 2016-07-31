@@ -14,6 +14,7 @@ class PostDetailTableViewController: UITableViewController {
     // MARK: - Stored Properties
     
     var fetchedResultsController: NSFetchedResultsController?
+    var cloudKitManager = CloudKitManager()
     
     @IBOutlet weak var postImageView: UIImageView!
     
@@ -31,27 +32,10 @@ class PostDetailTableViewController: UITableViewController {
 
         if let post = post {
             
-//            guard let comments = fetchedResultsController?.fetchedObjects as? [Comment] else { return }
-            
-//            print("\nPost's comments")
-//            comments.map{ print($0.descriptionString) }
-            
             updateWithPost(post)
             tableView.reloadData()
         }
     }
-    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        do {
-//            try fetchedResultsController?.performFetch()
-//        } catch {
-//            print("Error: Latest comments could not be fetched")
-//        }
-//        
-//        tableView.reloadData()
-//    }
     
     // MARK: - Method(s)
     
@@ -173,5 +157,77 @@ class PostDetailTableViewController: UITableViewController {
         
     }
     
+    // MARK: - Subscriptions
+    
+    func addSubscriptionToPostComments(post: Post, alertBody: String?, completion: ((success: Bool, error: NSError?) -> Void)?) {
+        
+        guard let recordID = post.cloudKitRecordID else {
+            
+            fatalError("Unable to create CloudKit record reference for subscription.")
+        }
+        
+        let predicate = NSPredicate(format: "post == %@", argumentArray: [recordID])
+        
+        cloudKitManager.subscribe(Comment.typeKey, predicate: predicate, subscriptionID: post.recordName, contentAvailable: true, alertBody: alertBody, desiredKeys: [Comment.textKey, Comment.postKey], options: .FiresOnRecordCreation) { (subscription, error) in
+            
+            if let completion = completion {
+                
+                let success = subscription != nil
+                completion(success: success, error: error)
+            }
+        }
+    }
+    
+    func removeSubscriptionToPostcomments(post: Post, completion: ((success: Bool, error: NSError?) -> Void)?) {
+        
+        let subscrptionID = post.recordName
+        
+        cloudKitManager.unsubscribe(subscrptionID) { (subscriptionID, error) in
+            
+            if let completion = completion {
+                
+                let success = subscriptionID != nil && error == nil
+                completion(success: success, error: error)
+            }
+        }
+    }
+    
+    func checkSubscriptionToPostComments(post: Post, completion: ((subscribed: Bool) -> Void)?) {
+        
+        cloudKitManager.fetchSubscription(post.recordName) { (subscription, error) in
+            
+            if let completion = completion {
+                
+                let subscribed = subscription != nil
+                completion(subscribed: subscribed)
+            }
+        }
+    }
+    
+    func togglePostCommentSubscription(post: Post, completion: ((success: Bool, isSubscribed: Bool, error: NSError?) -> Void)?) {
+        
+        cloudKitManager.fetchSubscription(post.recordName) { (subscription, error) in
+            
+            if subscription != nil {
+                
+                self.removeSubscriptionToPostcomments(post, completion: { (success, error) in
+                    
+                    if let completion = completion {
+                        
+                        completion(success: success, isSubscribed: false, error: error)
+                    }
+                })
+            } else {
+                
+                self.addSubscriptionToPostComments(post, alertBody: "Somone commented on a post you follow", completion: { (success, error) in
+                    
+                    if let completion = completion {
+                        
+                        completion(success: true, isSubscribed: true, error: error)
+                    }
+                })
+            }
+        }
+    }
 
 }

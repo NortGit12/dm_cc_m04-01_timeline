@@ -25,6 +25,15 @@ class PostController {
         
 //        generateMockData()
         
+        subscribeToNewPosts { (success, error) in
+            
+            if error != nil {
+                print("Error: Problem subscribing to new posts")
+            } else {
+                print("Subscribed successfully to all new posts")
+            }
+        }
+        
         performFullSync()
     }
     
@@ -304,6 +313,18 @@ class PostController {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func subscribeToNewPosts(completion: ((success: Bool, error: NSError?) -> Void)?) {
+        
+        cloudKitManager.subscribe(Post.typeKey, predicate: NSPredicate(value: true), subscriptionID: "allPosts", contentAvailable: true, options: .FiresOnRecordCreation) { (subscription, error) in
+            
+            if let completion = completion {
+                
+                let success = subscription != nil
+                completion(success: success, error: error)
             }
         }
     }
