@@ -20,7 +20,10 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
     // MARK: - General
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        initializeFetchedResultsController()
 
         setUpSearchController()
         
@@ -33,7 +36,12 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         
         requestFullSync()
         
-        initializeFetchedResultsController()
+        // Hides the search bar
+        
+        if tableView.numberOfRowsInSection(0) > 0 {
+            
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+        }
     }
     
     // MARK: - Method(s)
@@ -43,8 +51,7 @@ class PostListTableViewController: UITableViewController, NSFetchedResultsContro
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         PostController.sharedController.performFullSync {
-            
-            self.tableView.reloadData()
+
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             if let completion = completion {

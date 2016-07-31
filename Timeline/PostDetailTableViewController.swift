@@ -16,7 +16,7 @@ class PostDetailTableViewController: UITableViewController {
     var fetchedResultsController: NSFetchedResultsController?
     
     @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var followPostButton: UIButton!
+    @IBOutlet weak var followPostBarButtonItem: UIBarButtonItem!
     
     var post: Post?
     
@@ -66,7 +66,7 @@ class PostDetailTableViewController: UITableViewController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 
-                self.followPostButton.titleLabel?.text = subscribed ? "Unfollow Post" : "Follow Post"
+                self.followPostBarButtonItem.title = subscribed ? "Unfollow Post" : "Follow Post"
             })
         }
     }
@@ -161,7 +161,12 @@ class PostDetailTableViewController: UITableViewController {
     
     @IBAction func followButtonTapped(sender: UIButton) {
         
+        guard let post = post else { return }
         
+        PostController.sharedController.togglePostCommentSubscription(post) { (success, isSubscribed, error) in
+            
+            self.updateWithPost(post)
+        }
     }
 
 }

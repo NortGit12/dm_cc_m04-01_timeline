@@ -27,10 +27,10 @@ class PostController {
         
         subscribeToNewPosts { (success, error) in
             
-            if error != nil {
-                print("Error: Problem subscribing to new posts")
-            } else {
+            if success == true {
                 print("Subscribed successfully to all new posts")
+            } else {
+                print("Error: Problem subscribing to new posts")
             }
         }
         
@@ -323,7 +323,9 @@ class PostController {
     
     func subscribeToNewPosts(completion: ((success: Bool, error: NSError?) -> Void)?) {
         
-        cloudKitManager.subscribe(Post.typeKey, predicate: NSPredicate(value: true), subscriptionID: "allPosts", contentAvailable: true, options: .FiresOnRecordCreation) { (subscription, error) in
+        let predicate = NSPredicate(value: true)
+        
+        cloudKitManager.subscribe(Post.typeKey, predicate: predicate, subscriptionID: "allNewPosts", contentAvailable: true, options: .FiresOnRecordCreation) { (subscription, error) in
             
             if let completion = completion {
                 
