@@ -185,6 +185,10 @@ class PostController {
         let moc = Stack.sharedStack.managedObjectContext
         moc.performBlockAndWait{
             
+            // ***********************************
+            // TODO: I believe that "Post.typeKey" should just be type.  Change this and test it to make sure the it works.
+            // ***********************************
+            
             referencesToExclude = self.syncedManagedObjects(Post.typeKey).flatMap{ $0.cloudKitReference }
             
             predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])

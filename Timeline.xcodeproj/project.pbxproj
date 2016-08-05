@@ -144,13 +144,13 @@
 		1F724B9F1D46A4D30011873D /* Model+CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */,
 				1F724BA01D46A6580011873D /* SyncableObject+CoreDataProperties.swift */,
 				1F724BA11D46A6580011873D /* SyncableObject.swift */,
 				1F724BA21D46A6580011873D /* Post+CoreDataProperties.swift */,
 				1F724BA31D46A6580011873D /* Post.swift */,
 				1F724BA41D46A6580011873D /* Comment+CoreDataProperties.swift */,
 				1F724BA51D46A6580011873D /* Comment.swift */,
-				1F724B9C1D46A4CB0011873D /* Model.xcdatamodeld */,
 				1F1619D81D495A0200A99E5D /* CloudKitManagedObject.swift */,
 			);
 			name = "Model+CoreData";
